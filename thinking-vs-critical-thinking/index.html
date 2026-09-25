@@ -14,8 +14,6 @@
       --accent: #f59e0b;
       --accent-soft: rgba(245, 158, 11, 0.14);
       --accent-border: rgba(245, 158, 11, 0.42);
-      --badge-bg: #78350f;
-      --badge-text: #fde68a;
       --status-glow: 0 0 25px rgba(245, 158, 11, 0.22);
       --example-bg: rgba(245, 158, 11, 0.08);
       --transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,8 +28,6 @@
       --accent: #10b981;
       --accent-soft: rgba(16, 185, 129, 0.14);
       --accent-border: rgba(16, 185, 129, 0.45);
-      --badge-bg: #064e3b;
-      --badge-text: #a7f3d0;
       --status-glow: 0 0 28px rgba(16, 185, 129, 0.28);
       --example-bg: rgba(16, 185, 129, 0.09);
     }
@@ -152,23 +148,6 @@
     }
 
     body.critical-mode .switch-knob { transform: translateX(32px); }
-
-    .status-banner {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .status-badge {
-      padding: 0.32rem 0.75rem;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      border: 1px solid var(--accent-border);
-    }
 
     .compare-btn {
       background: transparent;
@@ -450,6 +429,7 @@
 
     @media (max-width: 768px) {
       .definition-hero, .scenario-stage { grid-template-columns: 1fr; }
+      .control-panel { justify-content: center; }
     }
   </style>
 </head>
@@ -476,10 +456,7 @@
       <span class="mode-label ct-label">🧠 Critical Thinking Enabled</span>
     </div>
 
-    <div class="status-banner">
-      <span class="status-badge" id="modeBadge">MODE: NORMAL / UNCRITICAL</span>
-      <button class="compare-btn" id="compareBtn" type="button">Show Both Side-by-Side</button>
-    </div>
+    <button class="compare-btn" id="compareBtn" type="button">Show Both Side-by-Side</button>
   </div>
 
   <!-- Hero Banner -->
@@ -760,7 +737,7 @@
 
   function renderApp() {
     const body = document.body;
-    const modeBadge = document.getElementById("modeBadge");
+    const toggle = document.getElementById("masterToggle");
     const heroTitle = document.getElementById("heroTitle");
     const heroDesc = document.getElementById("heroDesc");
     const scoreSymbol = document.getElementById("scoreSymbol");
@@ -768,13 +745,13 @@
 
     if (state.criticalEnabled) {
       body.classList.add("critical-mode");
-      modeBadge.textContent = "MODE: CRITICAL THINKING ENABLED";
+      toggle.setAttribute("aria-checked", "true");
       heroTitle.textContent = "Reasonable, Reflective & Goal-Directed Thinking";
       heroDesc.textContent = "“Reasonable reflective thinking focused on deciding what to believe or do” (Ennis 1996) and “active, persistent and careful consideration of any belief or supposed form of knowledge in the light of the grounds that support it” (Dewey 1910 via Hitchcock 2024).";
       scoreSymbol.textContent = "Reflective";
     } else {
       body.classList.remove("critical-mode");
-      modeBadge.textContent = "MODE: NORMAL / UNCRITICAL";
+      toggle.setAttribute("aria-checked", "false");
       heroTitle.textContent = "Uncritical Day-to-Day Thinking";
       heroDesc.textContent = "Jumping immediately to the first explanation suggested by surface appearances without seeking alternatives, testing hypotheses, or asking pointed clarifying questions.";
       scoreSymbol.textContent = "Uncritical";
@@ -862,6 +839,14 @@
   document.getElementById("masterToggle").addEventListener("click", () => {
     state.criticalEnabled = !state.criticalEnabled;
     renderApp();
+  });
+
+  document.getElementById("masterToggle").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      state.criticalEnabled = !state.criticalEnabled;
+      renderApp();
+    }
   });
 
   document.getElementById("compareBtn").addEventListener("click", (e) => {
