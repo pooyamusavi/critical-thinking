@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Normal vs. Critical Thinking — Daily-Life Examples & Video Visualizer</title>
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.14);
+      --accent-border: rgba(245, 158, 11, 0.42);
+      --badge-bg: #78350f;
+      --badge-text: #fde68a;
+      --status-glow: 0 0 25px rgba(245, 158, 11, 0.22);
+      --example-bg: rgba(245, 158, 11, 0.08);
+      --transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.critical-mode {
+      --bg-primary: #06131f;
+      --bg-secondary: #0f293a;
+      --bg-card: #0c2231;
+      --text-primary: #f0fdf4;
+      --text-secondary: #94a3b8;
+      --accent: #10b981;
+      --accent-soft: rgba(16, 185, 129, 0.14);
+      --accent-border: rgba(16, 185, 129, 0.45);
+      --badge-bg: #064e3b;
+      --badge-text: #a7f3d0;
+      --status-glow: 0 0 28px rgba(16, 185, 129, 0.28);
+      --example-bg: rgba(16, 185, 129, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 2rem 1.25rem 4rem;
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.45rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      max-width: 780px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.96rem;
+    }
+
+    /* Sticky Master Toggle Panel */
+    .control-panel {
+      position: sticky;
+      top: 1rem;
+      z-index: 90;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--accent-border);
+      box-shadow: var(--status-glow);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mode-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .mode-label.normal-label { color: #f59e0b; opacity: 1; }
+    .mode-label.ct-label { color: #64748b; opacity: 0.6; }
+    body.critical-mode .mode-label.normal-label { color: #64748b; opacity: 0.6; }
+    body.critical-mode .mode-label.ct-label { color: #10b981; opacity: 1; }
+
+    .switch {
+      position: relative;
+      width: 68px;
+      height: 36px;
+      background: #f59e0b;
+      border-radius: 999px;
+      padding: 4px;
+      transition: var(--transition);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.35);
+    }
+
+    body.critical-mode .switch { background: #10b981; }
+
+    .switch-knob {
+      width: 28px;
+      height: 28px;
+      background: #ffffff;
+      border-radius: 50%;
+      transform: translateX(0);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    body.critical-mode .switch-knob { transform: translateX(32px); }
+
+    .status-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-badge {
+      padding: 0.32rem 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border: 1px solid var(--accent-border);
+    }
+
+    .compare-btn {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--accent-border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .compare-btn:hover, .compare-btn.active {
+      background: var(--accent);
+      color: #06131f;
+    }
+
+    /* Hero Definition Banner */
+    .definition-hero {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-border);
+      border-radius: 16px;
+      padding: 1.4rem 1.75rem;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .definition-hero h2 {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .citation-tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      margin-right: 0.4rem;
+      margin-top: 0.35rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .score-pill {
+      text-align: center;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      min-width: 180px;
+    }
+
+    .score-pill .score-symbol {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .score-pill .score-caption {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-title span {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* 6 Dimension Cards with Embedded Daily-Life Examples */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .factor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-border);
+      border-radius: 14px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .factor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--status-glow);
+    }
+
+    .factor-card.has-video {
+      border-width: 2px;
+      cursor: pointer;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card-category {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+    }
+
+    .video-trigger-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #04131d;
+      border: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .card-list {
+      list-style: none;
+      margin-bottom: 0.95rem;
+    }
+
+    .card-list li {
+      font-size: 0.84rem;
+      margin-bottom: 0.4rem;
+      padding-left: 1.15rem;
+      position: relative;
+    }
+
+    .card-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Daily-Life Example Box inside each Card */
+    .daily-example-box {
+      background: var(--example-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 0.8rem 0.95rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .daily-example-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .daily-example-text {
+      font-size: 0.84rem;
+      color: var(--text-primary);
+    }
+
+    .compare-split {
+      display: none;
+      margin-top: 0.65rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed rgba(255,255,255,0.16);
+      font-size: 0.82rem;
+    }
+
+    body.show-both .compare-split {
+      display: block;
+    }
+
+    /* Interactive Daily-Life Scenario Explorer */
+    .scenarios-box {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .scenario-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.52rem 0.95rem;
+      border-radius: 10px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #06131f;
+      border-color: var(--accent);
+    }
+
+    .scenario-stage {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 1.25rem;
+      background: rgba(0, 0, 0, 0.24);
+      padding: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .scenario-col h4 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .scenario-quote {
+      font-style: italic;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 0.6rem 0;
+      font-size: 0.9rem;
+    }
+
+    .steps-checklist {
+      list-style: none;
+      margin-top: 0.6rem;
+    }
+
+    .steps-checklist li {
+      font-size: 0.84rem;
+      margin-bottom: 0.38rem;
+      padding-left: 1.3rem;
+      position: relative;
+      color: var(--text-secondary);
+    }
+
+    .steps-checklist li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* VIDEO MODAL STYLES */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 9, 20, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .video-modal {
+      background: #0b1928;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      border-radius: 18px;
+      max-width: 880px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-header {
+      padding: 1rem 1.35rem;
+      background: #07121e;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 1.02rem;
+      color: #10b981;
+    }
+
+    .close-modal-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f8fafc;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+
+    .canvas-stage {
+      position: relative;
+      background: #040d17;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    #explainerCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .subtitle-bar {
+      position: absolute;
+      bottom: 14px;
+      left: 5%;
+      right: 5%;
+      background: rgba(4, 13, 23, 0.9);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #f0fdf4;
+    }
+
+    .video-controls {
+      padding: 1rem 1.35rem;
+      background: #081523;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .scrubber-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .play-btn, .voice-btn {
+      background: #10b981;
+      color: #04131d;
+      border: none;
+      padding: 0.45rem 0.95rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .voice-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .voice-btn.active {
+      background: #0ea5e9;
+      color: #04131d;
+    }
+
+    .timeline-slider {
+      flex: 1;
+      accent-color: #10b981;
+      cursor: pointer;
+    }
+
+    .time-readout {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      min-width: 85px;
+      text-align: right;
+    }
+
+    .scene-Chapters {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .chapter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 0.45rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .chapter-btn.active {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: #10b981;
+      color: #f0fdf4;
+    }
+
+    @media (max-width: 768px) {
+      .definition-hero, .scenario-stage { grid-template-columns: 1fr; }
+      .scene-Chapters { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="eyebrow">Interactive Literature &amp; Daily-Life Visualizer</div>
+    <h1>Normal Thinking vs. Critical Thinking in Daily Life</h1>
+    <p class="subtitle">
+      Visualizing theoretical factors and real everyday examples from <strong>Robert H. Ennis (1996)</strong> 
+      <em>"Critical Thinking Dispositions: Their Nature and Assessability"</em> &amp; 
+      <strong>David Hitchcock (2024)</strong> <em>Stanford Encyclopedia of Philosophy: "Critical Thinking"</em>.
+    </p>
+  </header>
+
+  <!-- Sticky Master Toggle Panel -->
+  <div class="control-panel">
+    <div class="toggle-wrapper" id="masterToggle" role="switch" aria-checked="false" tabindex="0">
+      <span class="mode-label normal-label">⚡ Normal / Uncritical Thinking</span>
+      <div class="switch">
+        <div class="switch-knob"></div>
+      </div>
+      <span class="mode-label ct-label">🧠 Critical Thinking Enabled</span>
+    </div>
+
+    <div class="status-banner">
+      <span class="status-badge" id="modeBadge">MODE: NORMAL / UNCRITICAL</span>
+      <button class="compare-btn" id="compareBtn" type="button">Show Both Side-by-Side</button>
+    </div>
+  </div>
+
+  <!-- Hero Banner -->
+  <section class="definition-hero">
+    <div>
+      <h2 id="heroTitle">Uncritical Day-to-Day Thinking</h2>
+      <p id="heroDesc">
+        Jumping immediately to the first explanation suggested by appearances without seeking alternatives, testing hypotheses, or checking supporting grounds.
+      </p>
+      <div>
+        <span class="citation-tag">Ennis (1996, pp. 165–169)</span>
+        <span class="citation-tag">Dewey (1910/1933) via Hitchcock (2024, §1–2)</span>
+      </div>
+    </div>
+    <div class="score-pill">
+      <div class="score-symbol" id="scoreSymbol">Uncritical</div>
+      <div class="score-caption">Every card &amp; scenario below<br>includes a Daily-Life Example</div>
+    </div>
+  </section>
+
+  <!-- 6 Core Factors Grid with Integrated Daily-Life Examples -->
+  <div class="section-title">
+    <div>6 Core Factors + Embedded Daily-Life Examples</div>
+    <span>Flip the top toggle to see how each everyday situation changes (Click Card #2 for Video)</span>
+  </div>
+  <div class="cards-grid" id="cardsContainer"></div>
+
+  <!-- Interactive Daily-Life Scenario Explorer (6 Everyday Cases) -->
+  <div class="scenarios-box">
+    <div class="section-title" style="margin-bottom: 0.75rem;">
+      <div>Interactive Daily-Life Scenario Explorer (6 Real Cases from the Papers)</div>
+      <span>Select any daily-life scenario below and flip the master toggle</span>
+    </div>
+    <div class="scenario-tabs" id="scenarioTabs"></div>
+    <div class="scenario-stage" id="scenarioStage"></div>
+  </div>
+</div>
+
+<!-- VIDEO EXPLAINER MODAL FOR CARD #2 -->
+<div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true">
+  <div class="video-modal">
+    <div class="modal-header">
+      <h3>🎬 Explainer Video: Open-Mindedness &amp; Proportioned Belief (Ferryboat Example)</h3>
+      <button class="close-modal-btn" id="closeModalBtn" title="Close Video">✕</button>
+    </div>
+
+    <div class="canvas-stage">
+      <canvas id="explainerCanvas" width="880" height="495"></canvas>
+      <div class="subtitle-bar" id="subtitleText">
+        Click Play to watch how Open-Mindedness &amp; Proportioned Belief work in daily life.
+      </div>
+    </div>
+
+    <div class="video-controls">
+      <div class="scrubber-row">
+        <button class="play-btn" id="playPauseBtn">⏸ Pause</button>
+        <input type="range" id="timelineSlider" class="timeline-slider" min="0" max="32" step="0.05" value="0" />
+        <span class="time-readout" id="timeReadout">00:00 / 00:32</span>
+        <button class="voice-btn" id="voiceToggleBtn">🔊 Voiceover: OFF</button>
+      </div>
+
+      <div class="scene-Chapters">
+        <button class="chapter-btn active" onclick="jumpToScene(0)">1. Uncritical Leap (0:00)</button>
+        <button class="chapter-btn" onclick="jumpToScene(8)">2. Notice Difficulties (0:08)</button>
+        <button class="chapter-btn" onclick="jumpToScene(16)">3. Seek Alternatives (0:16)</button>
+        <button class="chapter-btn" onclick="jumpToScene(24)">4. Warranted Position (0:24)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const state = {
+    criticalEnabled: false,
+    showBoth: false,
+    activeScenario: 0
+  };
+
+  const factorsData = [
+    {
+      hasVideo: false,
+      category: "1. Initiation & Sensitivity to Surroundings",
+      normalTitle: "Passive Observation & Unnoticed Clues",
+      normalBody: "Moves through daily routines without noticing anomalies or situations that call for reflection and explanation.",
+      normalBullets: [
+        "Lacks the sensitivity to notice situations calling for clarification or inquiry (Ennis 1996, p. 166).",
+        "Accepts sensory impressions passively without examining supporting grounds (Dewey 1910 via Hitchcock 2024, §1)."
+      ],
+      normalDailyTitle: "Daily-Life Example: Walking Outside & Highway Driving",
+      normalDailyText: "Feels the air suddenly turn cool on a walk or sees diamond carpool lane marks change spacing on the highway, but never looks up at the sky or wonders why the road markings shifted (Hitchcock 2024, §2.2–2.3).",
+      ctTitle: "Attentive Scientific Attitude of Mind",
+      ctBody: "Actively notices perplexing clues in everyday life and initiates persistent, careful inquiry into their grounds.",
+      ctBullets: [
+        "Active, persistent, and careful consideration of any belief in light of supporting grounds (Dewey 1910 via Hitchcock 2024, §1).",
+        "Combines inclination with sensitivity to notice when inquiry is needed (Perkins, Jay & Tishman 1993; Ennis 1996, p. 166)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Weather, Distant Blur & Diamond Lane",
+      ctDailyText: "Notices sudden coolness on a walk, infers rain, looks up to confirm a dark cloud obscuring the sun, and quickens steps; or confirms that highway diamond marks are close together only where a dotted single line allows lane crossing (Hitchcock 2024, §2.2–2.3).",
+      citation: "Ennis (1996, p. 166); Hitchcock (2024, §1, §2.2–2.3)"
+    },
+    {
+      hasVideo: true,
+      category: "2. Hypotheses & Alternatives",
+      normalTitle: "Jumping to the First Explanation",
+      normalBody: "Latches onto the very first idea suggested by surface appearances without generating or testing rival possibilities.",
+      normalBullets: [
+        "Stops thinking as soon as an initial idea seems to fit surface traits (Dewey 1910 via Hitchcock 2024, §2.1).",
+        "Neglects the disposition to seek alternatives and be open to them (Ennis 1996, pp. 165–166)."
+      ],
+      normalDailyTitle: "Daily-Life Example: The Ferryboat Pole",
+      normalDailyText: "Sees a long white pole with a gilded ball projecting from a ferryboat deck and immediately concludes: 'It's a flagpole!' based solely on color and shape (Hitchcock 2024, §2.1).",
+      ctTitle: "Open-Mindedness & Warranted Position",
+      ctBody: "Suspends premature judgment, imagines competing explanations, and takes a position when evidence warrants it.",
+      ctBullets: [
+        "Exercises the disposition to seek alternatives and be open to them (Ennis 1996, pp. 165–166).",
+        "Includes the disposition to be well-informed and to take a position when evidence and reasons warrant it (Ennis 1996, p. 169)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Testing the Ferryboat Pole",
+      ctDailyText: "Notices the pole is horizontal and lacks a rope or pulley. Tests 3 alternatives—(a) ornament, (b) wireless terminal, or (c) steering direction guide for the pilot—and accepts (c) because it projects in front of the pilot house (Hitchcock 2024, §2.1).",
+      citation: "Ennis (1996, pp. 165–169); Hitchcock (2024, §2.1)"
+    },
+    {
+      hasVideo: false,
+      category: "3. Gathering Evidence & Experimental Testing",
+      normalTitle: "Untested Assumptions in Home Life",
+      normalBody: "Jumps from an observed event at home to an immediate conclusion without testing whether predicted consequences hold.",
+      normalBullets: [
+        "Accepts the first dramatic explanation for a household anomaly without checking facts (Hitchcock 2024, §2.2).",
+        "Observes kitchen or physical phenomena without testing what causes them (Hitchcock 2024, §2.1)."
+      ],
+      normalDailyTitle: "Daily-Life Example: Messy Room & Washing Dishes",
+      normalDailyText: "Walks into a disordered room with belongings thrown about and immediately assumes a burglary occurred; or watches soap bubbles on hot washed tumblers without asking why they move out and in (Hitchcock 2024, §2.1–2.2).",
+      ctTitle: "Targeted Observation & Kitchen Experimentation",
+      ctBody: "Checks specific facts that distinguish rival hypotheses and runs simple everyday experiments to verify causes.",
+      ctBullets: [
+        "Compares rival explanations by looking to see whether specific predicted traits are present (Hitchcock 2024, §2.2).",
+        "Manipulates conditions experimentally to confirm cause and effect (Hitchcock 2024, §2.1)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Checking Valuables & Testing Tumblers",
+      ctDailyText: "In the disordered room, considers mischievous children vs. burglary and checks whether valuables are missing. While washing tumblers in hot soapsuds, tests air expansion/contraction by trapping cold air and placing a cup of ice on the glass (Hitchcock 2024, §2.1–2.2).",
+      citation: "Hitchcock (2024, §2.1–2.2)"
+    },
+    {
+      hasVideo: false,
+      category: "4. Clarity, Meaning & Pointed Questions",
+      normalTitle: "Unclarified Confusion & Term Mix-Ups",
+      normalBody: "Fails to clarify ambiguous statements in conversation or gets misled when terms shift from everyday meaning.",
+      normalBullets: [
+        "Has the disposition to clarify without the ability—saying 'I know that this is confusing, but I do not know what to do about it' (Ennis 1996, pp. 166–167).",
+        "Risks confusion when technical definitions replace everyday meanings without warning (Ennis 1996, p. 167)."
+      ],
+      normalDailyTitle: "Daily-Life Example: Confusing Class/Meeting & Carrying Ice",
+      normalDailyText: "Sits in a confusing discussion unable to formulate a clarifying question; or gets confused by a shift in word meaning—like a boss claiming you did no 'work' (in the physics sense) after carrying a heavy block of ice a long distance (Ennis 1996, pp. 166–167).",
+      ctTitle: "Disposition + Ability to Clarify Meaning",
+      ctBody: "Recognizes ambiguity, asks pointed questions to build understanding, and keeps everyday vs. technical meanings clear.",
+      ctBullets: [
+        "Exercises both the disposition to clarify and the ability to ask pointed questions (Ennis 1996, pp. 166–167).",
+        "Maintains clarity about how terms are used so no one is misled in instruction or workplace goals (Ennis 1996, p. 167)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Asking Pointed Questions",
+      ctDailyText: "When a discussion or policy is confusing, actively asks pointed questions like 'What's the main idea?' and 'What does that imply for the situation?'—and clearly separates everyday work (carrying ice) from physics definitions (Ennis 1996, p. 167).",
+      citation: "Ennis (1996, pp. 166–169)"
+    },
+    {
+      hasVideo: false,
+      category: "5. Hidden Dispositions vs. Abilities",
+      normalTitle: "Unexercised Skill or Feigned Disposition",
+      normalBody: "Can pass a multiple-choice skill test when prompted, or fake open-mindedness when watched, but fails to use it in real life.",
+      normalBullets: [
+        "Like the brittleness of glass, dispositions are hidden qualities not revealed by simple inspection (Ennis 1996, p. 166).",
+        "People can have critical thinking ability without the disposition to use it—or feign the disposition when the test purpose is obvious (Ennis 1996, pp. 166, 168)."
+      ],
+      normalDailyTitle: "Daily-Life Example: Faking Open-Mindedness on an Evaluation",
+      normalDailyText: "A person knows how to analyze arguments on a multiple-choice ability test—or pretends to be open-minded because they notice they are being assessed—but reverts to closed-minded habits in real life (Ennis 1996, pp. 166, 168).",
+      ctTitle: "Authentic Critical Spirit in Action",
+      ctBody: "Exercises genuine objectivity, intellectual honesty, and impartiality spontaneously when real-life problems strike.",
+      ctBullets: [
+        "Combines the disposition factor and ability factor in open-ended situations (Taube 1993; Norris & Hollett 1992 via Ennis 1996, p. 168).",
+        "Demonstrates a critical spirit: objectivity, intellectual honesty, impartiality, and commitment to evaluate reasons (Siegel 1988 via Ennis 1996, p. 168)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Spontaneous Reflection Under Pressure",
+      ctDailyText: "Just as glass reveals its brittleness only when struck, a critical thinker reveals genuine open-mindedness and truth-seeking spontaneously in unstructured, open-ended daily problems (Ennis 1996, pp. 166, 168).",
+      citation: "Ennis (1996, pp. 166, 168)"
+    },
+    {
+      hasVideo: false,
+      category: "6. Goal-Directed Daily Decisions",
+      normalTitle: "Habitual Routine or Hasty Medical Guess",
+      normalBody: "Sticks to a slow commuting habit or jumps to a hasty medical conclusion from conspicuous surface symptoms.",
+      normalBullets: [
+        "Fails to evaluate time constraints and route trade-offs when an urgent appointment arises (Hitchcock 2024, §2.1).",
+        "Draws a premature diagnostic conclusion from conspicuous symptoms without further data (Hitchcock 2024, §2.2–2.3)."
+      ],
+      normalDailyTitle: "Daily-Life Example: Late Commute & Sudden Skin Rash",
+      normalDailyText: "Boards the same surface car at 12:20 PM and arrives 20 minutes late to a 1:00 PM engagement; or blames a sudden chest rash on a single medication without checking conflicting clues on the back of the hand (Hitchcock 2024, §2.1, §2.3).",
+      ctTitle: "Reasonable Reflective Decision-Making",
+      ctBody: "Focuses reasonable reflective thinking on deciding what to believe or do by weighing all options and constraints.",
+      ctBullets: [
+        "Critical thinking is reasonable reflective thinking focused on deciding what to believe or do (Ennis 1996, p. 166).",
+        "Avoids drawing a diagnostic conclusion until more data are gathered via questioning and testing (Hitchcock 2024, §2.2)."
+      ],
+      ctDailyTitle: "Daily-Life Example: Express Subway & Weighing 5 Rash Causes",
+      ctDailyText: "Compares surface car, elevated train, and subway express station proximity to reach 124th Street by 1:00 PM; or weighs sulfa drug timing, new neck cream, unexposed hand mark, probiotics, eye drops, and heat rash before a trip (Hitchcock 2024, §2.1, §2.3).",
+      citation: "Ennis (1996, p. 166); Hitchcock (2024, §2.1–2.3)"
+    }
+  ];
+
+  const scenariosData = [
+    {
+      tab: "1. City Commute (Transit)",
+      source: "Dewey (1910: 68–69; 1933: 91–92) via Hitchcock (2024, §2.1 'Transit')",
+      situation: "You are downtown on 16th Street when a clock catches your eye at 12:20 PM. You have a 1:00 PM engagement at 124th Street. It took you a full hour to ride down on a surface streetcar.",
+      normalTitle: "Uncritical Commute: Habit or Impulsive Detour",
+      normalQuote: "“I'll just hop back on the same surface streetcar I took earlier—or maybe run toward that elevated train line two blocks over without checking where its station actually is.”",
+      normalSteps: [
+        "Takes the surface car again without calculating travel time and arrives 20 minutes late.",
+        "Or chases an elevated line without considering that searching for a station several blocks up or down the street could lose more than 20 minutes."
+      ],
+      ctTitle: "Reflective Commute: Weighing Trade-offs & Proximity",
+      ctQuote: "“Returning by surface car will make me 20 minutes late. An elevated line is within two blocks, but if the station is several blocks away I'll lose time. The subway express is quicker AND goes nearer to the part of 124th Street I need to reach!”",
+      ctSteps: [
+        "Calculates that a 1-hour surface car ride from 12:20 PM means arriving 20 minutes late.",
+        "Evaluates both the subway express and the nearby elevated line against station-search time.",
+        "Remembers the subway express is faster and stops closer to the destination on 124th Street, arriving on time by 1:00 PM."
+      ]
+    },
+    {
+      tab: "2. Messy Room (Disorder)",
+      source: "Dewey (1910: 82–83; 1933: 166–168) via Hitchcock (2024, §2.2 'Disorder')",
+      situation: "You return home to find your rooms in disorder with your belongings thrown about.",
+      normalTitle: "Uncritical Reaction: Jumping to Burglary",
+      normalQuote: "“My belongings are thrown about—burglars must have broken into my home!”",
+      normalSteps: [
+        "Immediately accepts the first explanation (burglary) that pops into mind.",
+        "Fails to generate alternative explanations or check for specific confirming evidence."
+      ],
+      ctTitle: "Reflective Reaction: Alternative Hypothesis + Verification",
+      ctQuote: "“Burglary is one explanation, but mischievous children could also be an alternative explanation. Let me look to see whether my valuables are missing.”",
+      ctSteps: [
+        "Thinks first of burglary, then exercises the disposition to seek alternatives by considering mischievous children (Ennis 1996; Hitchcock 2024).",
+        "Identifies a decisive test between the two hypotheses: checking whether valuables are missing.",
+        "Looks and discovers that the valuables are indeed missing before concluding."
+      ]
+    },
+    {
+      tab: "3. Ferryboat & Diamond Lane",
+      source: "Dewey (1910: 69–70) & Hitchcock (2024, §2.1 'Ferryboat', §2.3 'Diamond')",
+      situation: "Daily Transit Observations: (A) On your daily ferryboat, a long white pole with a gilded ball projects nearly horizontally from the upper deck. (B) On the highway, diamond markings in a carpool lane are far apart in some places and close together in others.",
+      normalTitle: "Uncritical Observation: Accepting Surface Appearances",
+      normalQuote: "“The white pole has a gilded ball at the tip, so obviously it's a flagpole. And road markings are just painted however the crew felt like painting them.”",
+      normalSteps: [
+        "Relies on color, shape, and gilded ball alone to justify the flagpole belief.",
+        "Overlooks anomalous details (horizontal angle, missing rope/pulley, lane-line changes)."
+      ],
+      ctTitle: "Reflective Observation: Testing Hypotheses Against Evidence",
+      ctQuote: "“The pole is nearly horizontal, has no pulley or cord, and two vertical flagstaffs exist elsewhere. It isn't an ornament or wireless terminal—it's positioned below the pilot house so the pilot can see the direction the boat points! And on the highway, diamonds are close together only where a dotted single line permits crossing into the lane.”",
+      ctSteps: [
+        "Spots difficulties with the flagpole idea (horizontal position, no pulley/ring/cord, two vertical flagstaffs elsewhere).",
+        "Tests and rejects (a) ornament and (b) wireless terminal because tugboats also carry them and a wireless terminal belongs atop the pilot house.",
+        "Confirms (c) steering direction guide for the pilot, and verifies road diamond spacing against dotted vs. solid lane lines."
+      ]
+    },
+    {
+      tab: "4. Skin Rash & Typhoid",
+      source: "Hitchcock (2024, §2.2 'Typhoid', §2.3 'Rash')",
+      situation: "Health & Diagnosis: A woman develops a very itchy red rash on her throat and upper chest, plus a mark on the back of her right hand, right before leaving on a short vacation without access to her usual physician. Meanwhile, a physician sees a patient with conspicuous symptoms suggesting typhoid.",
+      normalTitle: "Uncritical Diagnosis: Conspicuous Symptoms Only",
+      normalQuote: "“The symptoms look like typhoid—case closed! And for the rash, the pharmacist warned me about the sulfa blood pressure drug two weeks ago, so that must be the only cause!”",
+      normalSteps: [
+        "Draws an immediate conclusion from conspicuous symptoms without gathering more data.",
+        "Focuses on a single suspect while ignoring timing and conflicting physical clues."
+      ],
+      ctTitle: "Reflective Diagnosis: Suspending Judgment & Weighing All Candidates",
+      ctQuote: "“The physician avoids drawing a conclusion until questioning the patient and making tests. For the rash, let's weigh all 5 possibilities and their counter-evidence before leaving on vacation.”",
+      ctSteps: [
+        "Weighs (1) blood pressure medication with a sulfa drug started 2 weeks ago (pharmacist warned of allergy, but 2 weeks passed with no effect).",
+        "Weighs (2) new neck/chest cream started yesterday (against this: the mark on the back of her right hand was not exposed to the cream).",
+        "Also considers (3) probiotics started a month ago, (4) new eye drops, and (5) heat rash from recent profuse upper-body sweating."
+      ]
+    },
+    {
+      tab: "5. Kitchen Bubbles & Outdoors",
+      source: "Dewey (1910: 6–10, 70–71, 102) via Hitchcock (2024, §2.1 'Bubbles', §2.2 'Weather' & 'Blur')",
+      situation: "Everyday Physics: While washing tumblers in hot soapsuds and placing them mouth downward on a plate, bubbles appear outside the mouth and then go inside. Outdoors, a walker feels the air turn cool and spots a moving blur in the distance.",
+      normalTitle: "Uncritical Reaction: Passive Everyday Routine",
+      normalQuote: "“Soap bubbles just do random things when you wash dishes, and a blur in the distance is just something moving.”",
+      normalSteps: [
+        "Washes dishes and walks outdoors without asking 'Why?' or testing cause and effect.",
+        "Never checks which observable traits distinguish competing possibilities."
+      ],
+      ctTitle: "Reflective Experimentation: Testing Heat, Ice & Traits",
+      ctQuote: "“Cold air trapped inside the hot tumbler must have expanded to push bubbles out, then contracted as it cooled to pull them in! Let me test this with shaken tumblers and a cup of ice.”",
+      ctSteps: [
+        "Tests the heated-air hypothesis by shaking some tumblers to trap cold air and holding others mouth downward: bubbles appear only on the former.",
+        "Tests the cooling-contraction hypothesis by placing a cup of ice on the tumbler: the bubbles soon reverse.",
+        "Outdoors, checks the sky for a dark rain cloud when the air cools, and checks specific visual traits to tell whether a distant blur is whirling dust, a moving tree, or a man signaling."
+      ]
+    },
+    {
+      tab: "6. Confusing Talk & Carrying Ice",
+      source: "Ennis (1996, pp. 166–168) — Dispositions, Abilities & Everyday Meaning",
+      situation: "Communication & Workplace: In a class or meeting, someone presents a confusing argument. Later, a worker carries a heavy block of ice a long distance at the direction of their boss, and someone claims no 'work' (in the physics sense) was done.",
+      normalTitle: "Uncritical Response: Helplessness or Linguistic Confusion",
+      normalQuote: "“I know that this is confusing, but I do not know what to do about it. And if 'work' in physics means zero work was done carrying that ice, maybe the boss doesn't have to pay!”",
+      normalSteps: [
+        "Either fails to sense the need for clarification at all, or lacks the ability to ask clarifying questions (Ennis 1996, pp. 166–167).",
+        "Allows shifts between technical definitions and everyday meanings to cause confusion and damage (Ennis 1996, p. 167)."
+      ],
+      ctTitle: "Reflective Response: Pointed Questions & Semantic Clarity",
+      ctQuote: "“Let's clarify by asking pointed questions: 'What's the main idea?' and 'What does that imply for the situation?' And no boss can withhold pay for carrying heavy ice by appealing to the special physics sense of 'work'!”",
+      ctSteps: [
+        "Combines the disposition to clarify with the sensitivity to notice confusion and the ability to ask pointed questions (Ennis 1996, pp. 166–167).",
+        "Protects everyday meanings in practical and educational contexts so no one is misled by technical redefinitions (Ennis 1996, pp. 167–168)."
+      ]
+    }
+  ];
+
+  function renderApp() {
+    const body = document.body;
+    const modeBadge = document.getElementById("modeBadge");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroDesc = document.getElementById("heroDesc");
+    const scoreSymbol = document.getElementById("scoreSymbol");
+    const cardsContainer = document.getElementById("cardsContainer");
+
+    if (state.criticalEnabled) {
+      body.classList.add("critical-mode");
+      modeBadge.textContent = "MODE: CRITICAL THINKING ENABLED";
+      heroTitle.textContent = "Reasonable, Reflective & Goal-Directed Thinking";
+      heroDesc.textContent = "“Reasonable reflective thinking focused on deciding what to believe or do” (Ennis 1996) and “active, persistent and careful consideration of any belief or supposed form of knowledge in the light of the grounds that support it” (Dewey 1910 via Hitchcock 2024).";
+      scoreSymbol.textContent = "Reflective";
+    } else {
+      body.classList.remove("critical-mode");
+      modeBadge.textContent = "MODE: NORMAL / UNCRITICAL";
+      heroTitle.textContent = "Uncritical Day-to-Day Thinking";
+      heroDesc.textContent = "Jumping immediately to the first explanation suggested by surface appearances without seeking alternatives, testing hypotheses, or asking pointed clarifying questions.";
+      scoreSymbol.textContent = "Uncritical";
+    }
+
+    body.classList.toggle("show-both", state.showBoth);
+
+    cardsContainer.innerHTML = factorsData.map(card => {
+      const isCT = state.criticalEnabled;
+      const mainTitle = isCT ? card.ctTitle : card.normalTitle;
+      const mainBody = isCT ? card.ctBody : card.normalBody;
+      const mainBullets = isCT ? card.ctBullets : card.normalBullets;
+      const dailyTitle = isCT ? card.ctDailyTitle : card.normalDailyTitle;
+      const dailyText = isCT ? card.ctDailyText : card.normalDailyText;
+      const altTitle = isCT ? card.normalTitle : card.ctTitle;
+      const altDailyText = isCT ? card.normalDailyText : card.ctDailyText;
+
+      return `
+        <article class="factor-card ${card.hasVideo ? 'has-video' : ''}" ${card.hasVideo ? 'onclick="openVideoModal()"' : ''}>
+          <div>
+            <div class="card-header">
+              <span class="card-category">${card.category}</span>
+              ${card.hasVideo ? `<button type="button" class="video-trigger-btn" onclick="event.stopPropagation(); openVideoModal();">▶ Watch Explainer Video</button>` : ''}
+            </div>
+            <h3 class="card-title">${mainTitle}</h3>
+            <p class="card-body">${mainBody}</p>
+            <ul class="card-list">
+              ${mainBullets.map(b => `<li>${b}</li>`).join("")}
+            </ul>
+            <div class="daily-example-box">
+              <span class="daily-example-tag">🏡 ${dailyTitle}</span>
+              <p class="daily-example-text">${dailyText}</p>
+            </div>
+            <div class="compare-split">
+              <strong>Contrast (${isCT ? 'Normal Mode' : 'Critical Mode'} — ${altTitle}):</strong>
+              <p style="color: var(--text-secondary); margin-top: 0.25rem;">${altDailyText}</p>
+            </div>
+          </div>
+          <div>
+            <span class="citation-tag">📄 ${card.citation}</span>
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    renderScenarios();
+  }
+
+  function renderScenarios() {
+    const tabsEl = document.getElementById("scenarioTabs");
+    const stageEl = document.getElementById("scenarioStage");
+
+    tabsEl.innerHTML = scenariosData.map((s, idx) => `
+      <button type="button" class="tab-btn ${idx === state.activeScenario ? 'active' : ''}" onclick="selectScenario(${idx})">
+        ${s.tab}
+      </button>
+    `).join("");
+
+    const current = scenariosData[state.activeScenario];
+    const isCT = state.criticalEnabled;
+    const rTitle = isCT ? current.ctTitle : current.normalTitle;
+    const rQuote = isCT ? current.ctQuote : current.normalQuote;
+    const rSteps = isCT ? current.ctSteps : current.normalSteps;
+
+    stageEl.innerHTML = `
+      <div class="scenario-col">
+        <h4>Everyday Situation</h4>
+        <p style="font-size: 0.92rem; margin-bottom: 0.65rem;">${current.situation}</p>
+        <span class="citation-tag">📄 ${current.source}</span>
+      </div>
+      <div class="scenario-col">
+        <h4>${rTitle}</h4>
+        <div class="scenario-quote">${rQuote}</div>
+        <ul class="steps-checklist">
+          ${rSteps.map(step => `<li>${step}</li>`).join("")}
+        </ul>
+      </div>
+    `;
+  }
+
+  window.selectScenario = function(idx) {
+    state.activeScenario = idx;
+    renderScenarios();
+  };
+
+  document.getElementById("masterToggle").addEventListener("click", () => {
+    state.criticalEnabled = !state.criticalEnabled;
+    renderApp();
+  });
+
+  document.getElementById("compareBtn").addEventListener("click", (e) => {
+    state.showBoth = !state.showBoth;
+    e.target.classList.toggle("active", state.showBoth);
+    e.target.textContent = state.showBoth ? "Hide Side-by-Side" : "Show Both Side-by-Side";
+    renderApp();
+  });
+
+  /* =========================================================
+     HTML5 ANIMATED VIDEO ENGINE (FERRYBOAT POLE & ALTERNATIVES)
+     ========================================================= */
+  const canvas = document.getElementById("explainerCanvas");
+  const ctx = canvas.getContext("2d");
+  const subtitleEl = document.getElementById("subtitleText");
+  const sliderEl = document.getElementById("timelineSlider");
+  const timeReadoutEl = document.getElementById("timeReadout");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const voiceToggleBtn = document.getElementById("voiceToggleBtn");
+  const chapterBtns = document.querySelectorAll(".chapter-btn");
+
+  const VIDEO_DURATION = 32;
+  let currentTime = 0;
+  let isPlaying = false;
+  let lastFrameTime = null;
+  let animFrameId = null;
+  let voiceEnabled = false;
+  let lastSpokenScene = -1;
+
+  const scenes = [
+    {
+      start: 0,
+      end: 8,
+      title: "SCENE 1: UNCRITICAL LEAP IN DAILY LIFE (THE FERRYBOAT POLE)",
+      subtitle: "On a daily ferry commute, you see a white pole with a gilded ball and immediately assume: 'It's a flagpole!' (Dewey 1910 / Hitchcock 2024).",
+      narration: "Scene 1. On your daily ferryboat commute, you see a white pole with a gilded ball at its tip and immediately assume it is a flagpole."
+    },
+    {
+      start: 8,
+      end: 16,
+      title: "SCENE 2: SUSPENDING JUDGMENT & NOTICING DIFFICULTIES",
+      subtitle: "Critical thinking notices difficulties: The pole is nearly horizontal, has no pulley or cord, and two vertical flagstaffs already exist elsewhere.",
+      narration: "Scene 2. Critical thinking pauses to notice difficulties: the pole is nearly horizontal, lacks a pulley or cord, and two vertical flagstaffs already exist on the boat."
+    },
+    {
+      start: 16,
+      end: 24,
+      title: "SCENE 3: DISPOSITION TO SEEK ALTERNATIVES & BE OPEN TO THEM",
+      subtitle: "Following Ennis (1996), we seek alternatives and test them: (A) Ornament? (B) Wireless telegraph terminal? (C) Pilot steering direction guide?",
+      narration: "Scene 3. Following Robert Ennis, we exercise the disposition to seek alternatives and be open to them: Could the pole be an ornament, a wireless terminal, or a steering guide?"
+    },
+    {
+      start: 24,
+      end: 32,
+      title: "SCENE 4: TAKING A POSITION WHEN WARRANTED BY EVIDENCE",
+      subtitle: "Tugboats carry them too (ruling out ornament/wireless), and it sits below the pilot house so the pilot can steer. Belief matches the evidence!",
+      narration: "Scene 4. Because tugboats also carry these poles and the tip projects in front of the pilot house to guide steering, we take a position warranted by the evidence."
+    }
+  ];
+
+  function speakSceneIfNeeded(sceneIndex) {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    if (sceneIndex !== lastSpokenScene) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(scenes[sceneIndex].narration);
+      utterance.rate = 1.05;
+      window.speechSynthesis.speak(utterance);
+      lastSpokenScene = sceneIndex;
+    }
+  }
+
+  function formatTime(sec) {
+    const s = Math.floor(sec);
+    return `00:${s < 10 ? '0' + s : s}`;
+  }
+
+  function getActiveSceneIndex(t) {
+    for (let i = 0; i < scenes.length; i++) {
+      if (t >= scenes[i].start && t < scenes[i].end) return i;
+    }
+    return scenes.length - 1;
+  }
+
+  function drawRoundedRect(x, y, w, h, r, fill, stroke) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, r);
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 2; ctx.stroke(); }
+  }
+
+  function renderCanvasFrame(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#040d17";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const sceneIdx = getActiveSceneIndex(t);
+    const scene = scenes[sceneIdx];
+    const localProgress = (t - scene.start) / (scene.end - scene.start);
+
+    subtitleEl.textContent = scene.subtitle;
+    chapterBtns.forEach((btn, idx) => btn.classList.toggle("active", idx === sceneIdx));
+    if (isPlaying) speakSceneIfNeeded(sceneIdx);
+
+    drawRoundedRect(30, 22, 820, 44, 8, "rgba(16, 185, 129, 0.12)", "rgba(16, 185, 129, 0.4)");
+    ctx.fillStyle = "#10b981";
+    ctx.font = "bold 15px Inter, sans-serif";
+    ctx.fillText(scene.title, 48, 50);
+
+    if (sceneIdx === 0) {
+      drawRoundedRect(60, 130, 260, 170, 14, "#1e293b", "#f59e0b");
+      ctx.fillStyle = "#fde68a";
+      ctx.font = "bold 17px Inter, sans-serif";
+      ctx.fillText("Daily Commute Sight", 85, 170);
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = "14px Inter, sans-serif";
+      ctx.fillText("• White pole on upper deck", 85, 205);
+      ctx.fillText("• Gilded ball at its tip", 85, 230);
+
+      const arrowLen = Math.min(1, localProgress * 2) * 180;
+      ctx.strokeStyle = "#f59e0b";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(340, 215);
+      ctx.lineTo(340 + arrowLen, 215);
+      ctx.stroke();
+
+      if (localProgress > 0.35) {
+        drawRoundedRect(540, 130, 270, 170, 14, "rgba(120, 53, 15, 0.5)", "#f59e0b");
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "bold 18px Inter, sans-serif";
+        ctx.fillText("Uncritical Belief:", 565, 175);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 20px Inter, sans-serif";
+        ctx.fillText("“It's a Flagpole!”", 565, 210);
+        ctx.fillStyle = "#fca5a5";
+        ctx.font = "13px Inter, sans-serif";
+        ctx.fillText("✗ No alternatives considered", 565, 250);
+      }
+    } else if (sceneIdx === 1) {
+      drawRoundedRect(60, 115, 340, 230, 14, "#0f293a", "#38bdf8");
+      ctx.fillStyle = "#38bdf8";
+      ctx.font = "bold 17px Inter, sans-serif";
+      ctx.fillText("⏸ Wait: Contradictory Clues", 85, 155);
+      const checks = [
+        "1. Pole is nearly horizontal",
+        "2. No pulley, ring, or cord for a flag",
+        "3. Two vertical staffs already fly flags"
+      ];
+      checks.forEach((text, idx) => {
+        if (localProgress > idx * 0.25) {
+          ctx.fillStyle = "#f0fdf4";
+          ctx.font = "14px Inter, sans-serif";
+          ctx.fillText(text, 85, 200 + idx * 40);
+        }
+      });
+
+      drawRoundedRect(450, 145, 360, 170, 14, "#1e293b", "#ef4444");
+      ctx.fillStyle = "#f87171";
+      ctx.font = "bold 17px Inter, sans-serif";
+      ctx.fillText("Flagpole Idea Rejected", 480, 190);
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = "14px Inter, sans-serif";
+      ctx.fillText("Like the physician checking typhoid:", 480, 230);
+      ctx.fillText("Suspend conclusion & seek alternatives.", 480, 255);
+    } else if (sceneIdx === 2) {
+      const hypotheses = [
+        { title: "(A) An Ornament?", desc: "Decorative pole on deck", color: "#f59e0b", x: 55 },
+        { title: "(B) Wireless Terminal?", desc: "Radio telegraph pole", color: "#38bdf8", x: 310 },
+        { title: "(C) Steering Guide?", desc: "Shows pilot boat direction", color: "#10b981", x: 565 }
+      ];
+      hypotheses.forEach((h, i) => {
+        const appear = Math.max(0, Math.min(1, (localProgress - i * 0.2) * 3));
+        if (appear > 0) {
+          ctx.save();
+          ctx.globalAlpha = appear;
+          drawRoundedRect(h.x, 135, 245, 190, 14, "#0c2231", h.color);
+          ctx.fillStyle = h.color;
+          ctx.font = "bold 15px Inter, sans-serif";
+          ctx.fillText(h.title, h.x + 18, 175);
+          ctx.fillStyle = "#e2e8f0";
+          ctx.font = "13px Inter, sans-serif";
+          ctx.fillText(h.desc, h.x + 18, 210);
+          ctx.restore();
+        }
+      });
+    } else if (sceneIdx === 3) {
+      const bars = [
+        { label: "(A) Ornament — Rejected (All ferryboats & tugboats carry them)", weight: 10, color: "#ef4444", y: 140 },
+        { label: "(B) Wireless Terminal — Rejected (Belongs on top of pilot house)", weight: 15, color: "#f59e0b", y: 210 },
+        { label: "(C) Pilot Direction Guide — Accepted (Projects out in front of pilot)", weight: 92, color: "#10b981", y: 280 }
+      ];
+      bars.forEach(b => {
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "14px Inter, sans-serif";
+        ctx.fillText(b.label, 60, b.y);
+        drawRoundedRect(60, b.y + 10, 720, 26, 6, "rgba(255,255,255,0.06)", null);
+        const fillWidth = (b.weight / 100) * 720 * Math.min(1, localProgress * 1.5);
+        drawRoundedRect(60, b.y + 10, Math.max(12, fillWidth), 26, 6, b.color, null);
+      });
+    }
+  }
+
+  function updateLoop(timestamp) {
+    if (!lastFrameTime) lastFrameTime = timestamp;
+    const dt = (timestamp - lastFrameTime) / 1000;
+    lastFrameTime = timestamp;
+
+    if (isPlaying) {
+      currentTime += dt;
+      if (currentTime >= VIDEO_DURATION) {
+        currentTime = 0;
+        lastSpokenScene = -1;
+      }
+      sliderEl.value = currentTime;
+      timeReadoutEl.textContent = `${formatTime(currentTime)} / 00:32`;
+      renderCanvasFrame(currentTime);
+      animFrameId = requestAnimationFrame(updateLoop);
+    }
+  }
+
+  window.openVideoModal = function() {
+    document.getElementById("videoModal").classList.add("open");
+    isPlaying = true;
+    playPauseBtn.textContent = "⏸ Pause";
+    lastFrameTime = null;
+    renderCanvasFrame(currentTime);
+    cancelAnimationFrame(animFrameId);
+    animFrameId = requestAnimationFrame(updateLoop);
+  };
+
+  document.getElementById("closeModalBtn").addEventListener("click", () => {
+    document.getElementById("videoModal").classList.remove("open");
+    isPlaying = false;
+    cancelAnimationFrame(animFrameId);
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  });
+
+  playPauseBtn.addEventListener("click", () => {
+    isPlaying = !isPlaying;
+    playPauseBtn.textContent = isPlaying ? "⏸ Pause" : "▶ Play";
+    if (isPlaying) {
+      lastFrameTime = null;
+      animFrameId = requestAnimationFrame(updateLoop);
+    } else if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  });
+
+  sliderEl.addEventListener("input", (e) => {
+    currentTime = parseFloat(e.target.value);
+    timeReadoutEl.textContent = `${formatTime(currentTime)} / 00:32`;
+    lastSpokenScene = -1;
+    renderCanvasFrame(currentTime);
+  });
+
+  window.jumpToScene = function(sec) {
+    currentTime = sec;
+    sliderEl.value = sec;
+    timeReadoutEl.textContent = `${formatTime(currentTime)} / 00:32`;
+    lastSpokenScene = -1;
+    renderCanvasFrame(currentTime);
+  };
+
+  voiceToggleBtn.addEventListener("click", () => {
+    voiceEnabled = !voiceEnabled;
+    voiceToggleBtn.classList.toggle("active", voiceEnabled);
+    voiceToggleBtn.textContent = voiceEnabled ? "🔊 Voiceover: ON" : "🔊 Voiceover: OFF";
+    if (!voiceEnabled && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    } else if (voiceEnabled && isPlaying) {
+      lastSpokenScene = -1;
+      speakSceneIfNeeded(getActiveSceneIndex(currentTime));
+    }
+  });
+
+  renderApp();
+  renderCanvasFrame(0);
+</script>
+</body>
+</html>
