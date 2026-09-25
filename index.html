@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Critical Thinking — Interactive Modules</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 3.5rem 1.5rem;
+      line-height: 1.6;
+    }
+    .container { max-width: 760px; margin: 0 auto; }
+    h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    p.subtitle { color: #94a3b8; margin-bottom: 2rem; }
+    .grid { display: grid; gap: 1rem; }
+    a.card {
+      display: block;
+      background: #1e293b;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 14px;
+      padding: 1.35rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    a.card:hover {
+      transform: translateY(-2px);
+      border-color: #10b981;
+    }
+    .card-title { font-size: 1.15rem; font-weight: 700; color: #10b981; margin-bottom: 0.25rem; }
+    .card-desc { font-size: 0.9rem; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Critical Thinking Visualizations</h1>
+    <p class="subtitle">Select an interactive module below:</p>
+
+    <div class="grid">
+      <a class="card" href="./thinking-vs-critical-thinking/">
+        <div class="card-title">1. Normal Thinking vs. Critical Thinking →</div>
+        <div class="card-desc">Interactive toggle, daily-life scenarios, and explainer video based on Ennis (1996) and Hitchcock (2024).</div>
+      </a>
+
+      <a class="card" href="./constructive-thinking/">
+        <div class="card-title">2. Constructive Thinking →</div>
+        <div class="card-desc">Interactive visualization of constructive thinking frameworks and examples.</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
