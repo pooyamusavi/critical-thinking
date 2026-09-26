@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Critical Thinking vs. Constructive Thinking: Expanding How We Know</title>
+  <meta name="description" content="Interactive exploration of Barbara Thayer-Bacon's Constructive Thinking, Michael Polanyi's Tacit Knowing, and Noddings & Shore's Conscious Intuition." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            critical: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e',
+            },
+            constructive: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#7c3aed',
+              600: '#6d28d9',
+              700: '#5b21b6',
+              900: '#4c1d95',
+            },
+            tacit: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            intuition: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: #0f172a;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle scholarly dot-grid backdrop */
+    .bg-academic-grid {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Smooth card transitions */
+    .factor-card {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease;
+    }
+    .factor-card:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Animated progress bars for spectrum meters */
+    .meter-fill {
+      transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.4s ease;
+    }
+
+    /* Highlighted quote spans */
+    .quote-phrase {
+      transition: all 0.25s ease;
+      border-radius: 0.375rem;
+      padding: 0.1rem 0.3rem;
+      margin: 0 -0.1rem;
+      cursor: pointer;
+    }
+    .quote-phrase.active-scientific {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      box-shadow: 0 0 0 2px #7dd3fc;
+      font-weight: 600;
+    }
+    .quote-phrase.active-tacit {
+      background-color: #d1fae5;
+      color: #047857;
+      box-shadow: 0 0 0 2px #6ee7b7;
+      font-weight: 600;
+    }
+    .quote-phrase.active-intuition {
+      background-color: #fef3c7;
+      color: #b45309;
+      box-shadow: 0 0 0 2px #fcd34d;
+      font-weight: 600;
+    }
+    .quote-phrase.active-constructive {
+      background-color: #ede9fe;
+      color: #6d28d9;
+      box-shadow: 0 0 0 2px #c4b5fd;
+      font-weight: 600;
+    }
+
+    /* Custom pulse ring for active plot node */
+    @keyframes softPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.18); opacity: 0.4; }
+    }
+    .pulse-ring {
+      animation: softPulse 2.4s infinite ease-in-out;
+    }
+
+    /* Fade-in animation when switching tabs */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Top Navigation & Module Breadcrumb Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/90 border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <!-- Left: Module Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-slate-100 text-slate-600 border border-slate-200 shrink-0">
+          <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          epistemology-docs
+        </span>
+
+        <span class="text-slate-300 text-sm">/</span>
+
+        <!-- Module 1 Pill (Reference) -->
+        <a href="#section-grid" onclick="setGlobalParadigm('critical')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-100 hover:bg-slate-200/80 text-slate-600 transition shrink-0" title="Switch to Traditional Critical Thinking">
+          <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+          Module 1: Thinking vs. Critical Thinking
+        </a>
+
+        <!-- Module 2 Pill (Active) -->
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-2xs shrink-0">
+          <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+          Module 2: Critical vs. Constructive Thinking
+        </span>
+      </div>
+
+      <!-- Right: Quick Anchor Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-slate-600">
+        <a href="#section-grid" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">6-Factor Grid</a>
+        <a href="#section-spotlight" class="px-3 py-1.5 rounded-lg hover:bg-amber-50 hover:text-amber-800 transition flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+          Intuition &amp; Tacit Spotlight
+        </a>
+        <a href="#section-scenarios" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Real-World Scenarios</a>
+        <a href="#section-quiz" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Self-Check</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="relative bg-academic-grid border-b border-slate-200/90 pt-10 pb-12 sm:pt-14 sm:pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs text-xs font-medium text-slate-700 mb-5">
+          <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 font-semibold">Thayer-Bacon Framework</span>
+          <span>•</span>
+          <span class="text-emerald-700 font-medium">Polanyi (Tacit Knowing)</span>
+          <span>•</span>
+          <span class="text-amber-700 font-medium">Noddings &amp; Shore (1984, p. 54)</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          Critical Thinking vs.
+          <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-amber-600 bg-clip-text text-transparent">
+            Constructive Thinking
+          </span>
+          <span class="block text-xl sm:text-2xl lg:text-3xl font-bold text-slate-600 mt-2">
+            Expanding How We Know Beyond Pure Formalism
+          </span>
+        </h1>
+
+        <!-- Concise Subtitle -->
+        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
+          Traditional <strong>Critical Thinking</strong> relies heavily on the scientific paradigm—valuing only what can be formalized, operationalized, and proven through detached logic. <strong>Constructive Thinking</strong> (Barbara Thayer-Bacon) retains reason while expanding our epistemology to embrace <strong>embodied tacit knowing</strong> (Polanyi), <strong>fully conscious intuition</strong> (Noddings &amp; Shore), emotion, imagination, and relational context.
+        </p>
+
+        <!-- Key Epistemological Pill Summary -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-white/95 backdrop-blur rounded-xl p-3.5 border border-sky-200/80 shadow-2xs flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm shrink-0">1</div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-sky-700">Scientific Paradigm</div>
+              <p class="text-xs text-slate-600 mt-0.5">Formalized, operationalized, linear &amp; explicit rules.</p>
+            </div>
+          </div>
+
+          <div class="bg-white/95 backdrop-blur rounded-xl p-3.5 border border-emerald-200/80 shadow-2xs flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-emerald-700">Tacit Knowing (Polanyi)</div>
+              <p class="text-xs text-slate-600 mt-0.5">Unanalyzable &amp; non-formalizable, yet <em>subconscious / subsidiary</em>.</p>
+            </div>
+          </div>
+
+          <div class="bg-white/95 backdrop-blur rounded-xl p-3.5 border border-amber-300/90 shadow-2xs flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-amber-800">Intuition (Noddings &amp; Shore)</div>
+              <p class="text-xs text-slate-600 mt-0.5">Unanalyzable &amp; non-formalizable, yet <strong>fully conscious</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- =====================================================================
+         SECTION 1: MAIN INTERACTIVE TOGGLE & 6-FACTOR COMPARISON GRID
+         ===================================================================== -->
+    <section id="section-grid" class="scroll-mt-20">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+            Interactive Paradigm Explorer
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+            Six Core Epistemological Factors
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-1 max-w-2xl">
+            Toggle between the two paradigms—or activate the <strong>Side-by-Side Comparison View</strong>—to inspect how Constructive Thinking transforms our understanding of reason, intuition, tacit skill, and language.
+          </p>
+        </div>
+
+        <!-- Prominent Segmented Toggle Switch -->
+        <div class="bg-slate-200/80 p-1.5 rounded-2xl inline-flex flex-wrap sm:flex-nowrap gap-1 border border-slate-300/70 shadow-inner self-start lg:self-auto" role="tablist" aria-label="Paradigm View Toggle">
+          <button
+            id="btn-view-critical"
+            onclick="setGlobalParadigm('critical')"
+            class="paradigm-toggle-btn px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2"
+            role="tab"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+            <span>Traditional Critical</span>
+          </button>
+
+          <button
+            id="btn-view-constructive"
+            onclick="setGlobalParadigm('constructive')"
+            class="paradigm-toggle-btn px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2"
+            role="tab"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+            <span>Constructive Thinking</span>
+          </button>
+
+          <button
+            id="btn-view-compare"
+            onclick="setGlobalParadigm('compare')"
+            class="paradigm-toggle-btn px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-2"
+            role="tab"
+          >
+            <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+            </svg>
+            <span>Side-by-Side View</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Paradigm Summary Banner -->
+      <div id="paradigm-summary-banner" class="mb-6 rounded-2xl p-4 sm:p-5 border transition-all duration-300">
+        <!-- Dynamically populated by JS -->
+      </div>
+
+      <!-- 6-Card Comparison Grid -->
+      <div id="factors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dynamically populated by JS -->
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 2: INTERACTIVE SPOTLIGHT: "THE SPECTRUM OF KNOWING"
+         (Polanyi vs. Noddings & Shore vs. Scientific Paradigm)
+         ===================================================================== -->
+    <section id="section-spotlight" class="scroll-mt-20 bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+      <!-- Top Spotlight Header -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 lg:p-10">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-wide uppercase mb-3">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+              </svg>
+              Primary Text Spotlight • Noddings &amp; Shore (1984, p. 54)
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
+              The Spectrum of Knowing: Why Intuition ≠ Tacit Knowing
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+              Both Michael Polanyi’s <strong>Tacit Knowing</strong> and Noddings &amp; Shore’s <strong>Intuition</strong> defy the strict scientific paradigm because neither can be formalized into rigid rules. However, they diverge sharply on one vital dimension: <strong>Conscious Awareness</strong>.
+            </p>
+          </div>
+
+          <!-- Copy Primary Excerpt Button -->
+          <div class="shrink-0">
+            <button
+              onclick="copyExcerptToClipboard()"
+              id="copy-excerpt-btn"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-semibold transition cursor-pointer"
+            >
+              <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span id="copy-excerpt-label">Copy Exact Citation (p. 54)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive Annotated Excerpt Box -->
+        <div class="mt-7 bg-white text-slate-800 rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-lg">
+          <div class="flex items-center justify-between flex-wrap gap-2 mb-3 pb-2 border-b border-slate-100">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
+              Interactive Primary Excerpt — Click any highlighted phrase or select a Mental Mode below
+            </span>
+            <span class="text-xs font-serif italic text-slate-500">
+              Source: Noddings &amp; Shore (1984, p. 54), cited in Thayer-Bacon
+            </span>
+          </div>
+
+          <blockquote class="font-serif text-lg sm:text-xl leading-relaxed text-slate-800">
+            “<span
+              id="phrase-tacit"
+              onclick="selectSpectrumMode('tacit')"
+              class="quote-phrase"
+              title="Click to inspect Polanyi's Tacit Knowing"
+            >Intuition, as Noddings and Shore describe, shares the qualities that Polanyi mentioned with tacit knowing, in that it is unanalyzable and not something that can be formalized and operationalized.</span>
+            <span
+              id="phrase-scientific"
+              onclick="selectSpectrumMode('scientific')"
+              class="quote-phrase"
+              title="Click to inspect the Scientific Paradigm"
+            >It does not fit the scientific paradigm of thought.</span>
+            <span
+              id="phrase-intuition"
+              onclick="selectSpectrumMode('intuition')"
+              class="quote-phrase"
+              title="Click to inspect Noddings & Shore's Conscious Intuition"
+            >And yet, unlike Polanyi, intuition is something that we are conscious of. ‘No mental mode could be more fully conscious than the intuitive mode’ (1984, p. 54).</span>”
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Interactive 3-Mode Selector + Constructive Umbrella -->
+      <div class="p-6 sm:p-8 lg:p-10">
+        <div class="mb-6">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+            Select a Mental Mode to Inspect Its Epistemological Profile:
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" role="tablist">
+            <!-- Mode 1: Scientific -->
+            <button
+              id="mode-btn-scientific"
+              onclick="selectSpectrumMode('scientific')"
+              class="p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between"
+            >
+              <div class="flex items-center justify-between w-full mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-2.5 py-0.5 rounded-full">Mode 1</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+              </div>
+              <div class="font-bold text-slate-900 text-base">Scientific / Analytical Mode</div>
+              <div class="text-xs text-slate-500 mt-1">Formalized, step-by-step &amp; focal logic</div>
+            </button>
+
+            <!-- Mode 2: Tacit Knowing -->
+            <button
+              id="mode-btn-tacit"
+              onclick="selectSpectrumMode('tacit')"
+              class="p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between"
+            >
+              <div class="flex items-center justify-between w-full mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">Mode 2 • Polanyi</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <div class="font-bold text-slate-900 text-base">Tacit Knowing</div>
+              <div class="text-xs text-slate-500 mt-1">Unanalyzable &amp; subconscious skill</div>
+            </button>
+
+            <!-- Mode 3: Intuitive Mode -->
+            <button
+              id="mode-btn-intuition"
+              onclick="selectSpectrumMode('intuition')"
+              class="p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between"
+            >
+              <div class="flex items-center justify-between w-full mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">Mode 3 • Noddings &amp; Shore</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              </div>
+              <div class="font-bold text-slate-900 text-base">Intuitive Mode (1984)</div>
+              <div class="text-xs text-slate-500 mt-1">Unanalyzable yet <strong>fully conscious</strong></div>
+            </button>
+
+            <!-- Mode 4: Constructive Umbrella -->
+            <button
+              id="mode-btn-constructive"
+              onclick="selectSpectrumMode('constructive')"
+              class="p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between"
+            >
+              <div class="flex items-center justify-between w-full mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-100 px-2.5 py-0.5 rounded-full">Umbrella Synthesis</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+              </div>
+              <div class="font-bold text-slate-900 text-base">Constructive Thinking</div>
+              <div class="text-xs text-slate-500 mt-1">Weaves all three modes together</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Spotlight Split Dashboard: Left = 3 Interactive Dimension Meters & Details | Right = 2D Epistemological Matrix -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+          <!-- Left 7 Columns: The 3 Dimension Meters & Deep-Dive Card -->
+          <div class="lg:col-span-7 flex flex-col justify-between bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200/90">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-slate-200">
+                <div>
+                  <span id="spotlight-active-badge" class="inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1"></span>
+                  <h3 id="spotlight-active-title" class="text-xl sm:text-2xl font-bold text-slate-900"></h3>
+                </div>
+                <span id="spotlight-active-theorist" class="text-xs font-mono text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200"></span>
+              </div>
+
+              <!-- Dimension Meters Container -->
+              <div class="space-y-5">
+                <!-- Meter 1: Formalizable & Operationalizable? -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+                  <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      1. Formalizable &amp; Operationalizable?
+                    </span>
+                    <span id="meter-1-pill" class="text-xs font-bold px-2.5 py-0.5 rounded-full"></span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden my-2">
+                    <div id="meter-1-bar" class="meter-fill h-full rounded-full" style="width: 50%"></div>
+                  </div>
+                  <p id="meter-1-desc" class="text-xs text-slate-600 leading-relaxed"></p>
+                </div>
+
+                <!-- Meter 2: Fits Strict Scientific Paradigm? -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+                  <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      2. Fits Strict Scientific Paradigm?
+                    </span>
+                    <span id="meter-2-pill" class="text-xs font-bold px-2.5 py-0.5 rounded-full"></span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden my-2">
+                    <div id="meter-2-bar" class="meter-fill h-full rounded-full" style="width: 50%"></div>
+                  </div>
+                  <p id="meter-2-desc" class="text-xs text-slate-600 leading-relaxed"></p>
+                </div>
+
+                <!-- Meter 3: Level of Conscious Awareness? -->
+                <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+                  <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      3. Level of Conscious Awareness?
+                    </span>
+                    <span id="meter-3-pill" class="text-xs font-bold px-2.5 py-0.5 rounded-full"></span>
+                  </div>
+                  <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden my-2">
+                    <div id="meter-3-bar" class="meter-fill h-full rounded-full" style="width: 50%"></div>
+                  </div>
+                  <p id="meter-3-desc" class="text-xs text-slate-600 leading-relaxed"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Takeaway Footer Box -->
+            <div id="spotlight-takeaway-box" class="mt-5 p-4 rounded-xl border text-xs sm:text-sm leading-relaxed">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Right 5 Columns: Visual 2D Coordinate Matrix & Comparison Table -->
+          <div class="lg:col-span-5 flex flex-col justify-between bg-slate-900 text-white rounded-2xl p-5 sm:p-6 border border-slate-800">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-mono uppercase tracking-wider text-indigo-300">Visual Epistemology Map</span>
+                <span class="text-[11px] text-slate-400">Click any node to inspect</span>
+              </div>
+              <h4 class="text-base font-bold text-white mb-4">
+                Formalizability vs. Conscious Awareness
+              </h4>
+
+              <!-- Interactive SVG 2D Coordinate Plane -->
+              <div class="relative bg-slate-950/90 rounded-xl border border-slate-800 p-3 mb-5">
+                <svg viewBox="0 0 360 270" class="w-full h-auto select-none">
+                  <!-- Grid lines -->
+                  <line x1="50" y1="30" x2="330" y2="30" stroke="#1e293b" stroke-dasharray="3 3" />
+                  <line x1="50" y1="130" x2="330" y2="130" stroke="#334155" stroke-width="1" />
+                  <line x1="50" y1="220" x2="330" y2="220" stroke="#1e293b" stroke-dasharray="3 3" />
+                  <line x1="190" y1="20" x2="190" y2="235" stroke="#334155" stroke-width="1" />
+
+                  <!-- Constructive Thinking Umbrella Ellipse (spans all 3 nodes) -->
+                  <ellipse
+                    id="svg-umbrella"
+                    cx="190"
+                    cy="125"
+                    rx="132"
+                    ry="96"
+                    fill="rgba(124, 58, 237, 0.12)"
+                    stroke="#8b5cf6"
+                    stroke-width="1.75"
+                    stroke-dasharray="5 4"
+                    class="cursor-pointer transition-all duration-300"
+                    onclick="selectSpectrumMode('constructive')"
+                  />
+                  <text x="190" y="134" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="600" class="cursor-pointer" onclick="selectSpectrumMode('constructive')">
+                    CONSTRUCTIVE THINKING UMBRELLA
+                  </text>
+
+                  <!-- Axis Labels -->
+                  <text x="190" y="258" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600">
+                    ← UNANALYZABLE / NON-FORMALIZABLE | FORMALIZED &amp; OPERATIONALIZED →
+                  </text>
+                  <text x="16" y="130" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" transform="rotate(-90 16 130)">
+                    SUBCONSCIOUS ← AWARENESS → FULLY CONSCIOUS
+                  </text>
+
+                  <!-- Node 1: Intuitive Mode (Top-Left: Unanalyzable + Maximum Conscious Awareness) -->
+                  <g class="cursor-pointer" onclick="selectSpectrumMode('intuition')">
+                    <circle id="ring-intuition" cx="105" cy="52" r="22" fill="rgba(245, 158, 11, 0.25)" class="hidden pulse-ring" />
+                    <circle id="node-intuition" cx="105" cy="52" r="13" fill="#f59e0b" stroke="#fef3c7" stroke-width="2.5" />
+                    <text x="105" y="80" text-anchor="middle" fill="#fde68a" font-size="10.5" font-weight="700">Intuitive Mode</text>
+                    <text x="105" y="92" text-anchor="middle" fill="#cbd5e1" font-size="8.5">(Noddings &amp; Shore)</text>
+                  </g>
+
+                  <!-- Node 2: Tacit Knowing (Bottom-Left: Unanalyzable + Subsidiary/Subconscious) -->
+                  <g class="cursor-pointer" onclick="selectSpectrumMode('tacit')">
+                    <circle id="ring-tacit" cx="105" cy="195" r="22" fill="rgba(16, 185, 129, 0.25)" class="hidden pulse-ring" />
+                    <circle id="node-tacit" cx="105" cy="195" r="13" fill="#10b981" stroke="#d1fae5" stroke-width="2.5" />
+                    <text x="105" y="172" text-anchor="middle" fill="#a7f3d0" font-size="10.5" font-weight="700">Tacit Knowing</text>
+                    <text x="105" y="220" text-anchor="middle" fill="#cbd5e1" font-size="8.5">(Polanyi: Subconscious)</text>
+                  </g>
+
+                  <!-- Node 3: Scientific Mode (Top-Right: Formalized + High Focal Awareness) -->
+                  <g class="cursor-pointer" onclick="selectSpectrumMode('scientific')">
+                    <circle id="ring-scientific" cx="278" cy="75" r="22" fill="rgba(14, 165, 233, 0.25)" class="hidden pulse-ring" />
+                    <circle id="node-scientific" cx="278" cy="75" r="13" fill="#0ea5e9" stroke="#e0f2fe" stroke-width="2.5" />
+                    <text x="278" y="103" text-anchor="middle" fill="#bae6fd" font-size="10.5" font-weight="700">Scientific Mode</text>
+                    <text x="278" y="115" text-anchor="middle" fill="#cbd5e1" font-size="8.5">(Formal / Explicit)</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Compact Matrix Comparison Table -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="border-b border-slate-700 text-slate-400 font-mono text-[11px]">
+                    <th class="py-2 pr-2">Mental Mode</th>
+                    <th class="py-2 px-2">Formalizable?</th>
+                    <th class="py-2 pl-2">Consciousness</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800">
+                  <tr onclick="selectSpectrumMode('scientific')" class="hover:bg-slate-800/70 cursor-pointer transition">
+                    <td class="py-2 pr-2 font-semibold text-sky-300">Scientific</td>
+                    <td class="py-2 px-2 text-slate-300">Yes (Rules)</td>
+                    <td class="py-2 pl-2 text-slate-300">High / Focal</td>
+                  </tr>
+                  <tr onclick="selectSpectrumMode('tacit')" class="hover:bg-slate-800/70 cursor-pointer transition">
+                    <td class="py-2 pr-2 font-semibold text-emerald-300">Tacit (Polanyi)</td>
+                    <td class="py-2 px-2 text-rose-300">No (Unanalyzable)</td>
+                    <td class="py-2 pl-2 text-emerald-200">Subsidiary / Subconscious</td>
+                  </tr>
+                  <tr onclick="selectSpectrumMode('intuition')" class="hover:bg-slate-800/70 cursor-pointer transition">
+                    <td class="py-2 pr-2 font-semibold text-amber-300">Intuition (1984)</td>
+                    <td class="py-2 px-2 text-rose-300">No (Unanalyzable)</td>
+                    <td class="py-2 pl-2 font-bold text-amber-300">Maximum / Fully Conscious</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 3: INTERACTIVE SCENARIO EXPLORER (REAL-WORLD APPLICATION)
+         ===================================================================== -->
+    <section id="section-scenarios" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            Applied Epistemology Lab
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+            Real-World Scenarios: Seeing All Four Lenses in Action
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-1 max-w-3xl">
+            Select a scenario below to see how a situation looks through a <strong>Pure Critical/Scientific Lens</strong>, <strong>Polanyi’s Tacit Knowing</strong>, <strong>Noddings &amp; Shore’s Conscious Intuition</strong>, and <strong>The Constructive Thinker’s Synthesis</strong>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Scenario Selector Tabs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6" role="tablist">
+        <button
+          id="scenario-tab-0"
+          onclick="selectScenario(0)"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+        >
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 font-bold">
+            1
+          </div>
+          <div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Pacing an Endurance Race</div>
+            <div class="text-xs text-slate-500 mt-0.5">Athletic adjustment at Kilometer 32</div>
+          </div>
+        </button>
+
+        <button
+          id="scenario-tab-1"
+          onclick="selectScenario(1)"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+        >
+          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 font-bold">
+            2
+          </div>
+          <div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Debugging System Architecture</div>
+            <div class="text-xs text-slate-500 mt-0.5">Diagnosing an elusive distributed outage</div>
+          </div>
+        </button>
+
+        <button
+          id="scenario-tab-2"
+          onclick="selectScenario(2)"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+        >
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 font-bold">
+            3
+          </div>
+          <div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Mentoring a Student or Teammate</div>
+            <div class="text-xs text-slate-500 mt-0.5">Responding to unspoken hesitation</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Scenario Active Stage -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 sm:p-8">
+        <!-- Scenario Context Banner -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200">
+          <div>
+            <span id="scenario-tag" class="text-xs font-mono uppercase tracking-wider text-indigo-600 font-semibold"></span>
+            <h3 id="scenario-title" class="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5"></h3>
+            <p id="scenario-context" class="text-sm sm:text-base text-slate-600 mt-2 max-w-3xl"></p>
+          </div>
+
+          <!-- Lens Filter Pills -->
+          <div class="flex flex-wrap gap-1.5 shrink-0">
+            <button onclick="highlightScenarioLens('all')" id="lens-filter-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white cursor-pointer transition">
+              All 4 Lenses
+            </button>
+            <button onclick="highlightScenarioLens('scientific')" id="lens-filter-scientific" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-sky-50 cursor-pointer transition">
+              Scientific Only
+            </button>
+            <button onclick="highlightScenarioLens('tacit')" id="lens-filter-tacit" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-emerald-50 cursor-pointer transition">
+              Tacit (Polanyi)
+            </button>
+            <button onclick="highlightScenarioLens('intuition')" id="lens-filter-intuition" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-amber-50 cursor-pointer transition">
+              Intuition (Noddings)
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Lens Cards Grid -->
+        <div id="scenario-lenses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 4: INTERACTIVE SELF-CHECK / EPISTEMOLOGY MATCHER
+         ===================================================================== -->
+    <section id="section-quiz" class="scroll-mt-20 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-indigo-900/60 shadow-md">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-5 border-b border-slate-800">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-amber-300 font-semibold">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            Interactive Concept Check
+          </span>
+          <h2 class="text-2xl font-bold mt-1">Can You Distinguish the Mental Modes?</h2>
+          <p class="text-sm text-slate-300 mt-1">
+            Test your understanding of Noddings &amp; Shore (1984), Polanyi’s Tacit Knowing, and Thayer-Bacon’s Constructive Thinking.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <span id="quiz-score-badge" class="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-mono font-semibold text-indigo-200">
+            Score: 0 / 3 Answered
+          </span>
+          <button onclick="resetQuiz()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-slate-200 transition cursor-pointer">
+            Reset Check
+          </button>
+        </div>
+      </div>
+
+      <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200/90 mt-16 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="space-y-1">
+        <div class="font-semibold text-slate-800">
+          Key Theoretical References
+        </div>
+        <p>
+          • <strong>Noddings, N., &amp; Shore, P. J. (1984).</strong> <em>Awakening the Inner Eye: Intuition in Education.</em> New York: Teachers College Press (p. 54).
+        </p>
+        <p>
+          • <strong>Polanyi, M. (1966).</strong> <em>The Tacit Dimension.</em> Garden City, NY: Doubleday.
+        </p>
+        <p>
+          • <strong>Thayer-Bacon, B. J. (2000).</strong> <em>Transforming Critical Thinking: Thinking Constructively.</em> Teachers College Press.
+        </p>
+      </div>
+      <div class="text-right shrink-0">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-mono">
+          Ready for GitHub Pages • Single-File HTML
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * ========================================================================
+     * 1. DATASET: 6 CORE EPISTEMOLOGICAL FACTORS (Critical vs. Constructive)
+     * ========================================================================
+     */
+    const factorsData = [
+      {
+        id: 1,
+        number: "01",
+        title: "Core Toolset of Inquiry",
+        subtitle: "What faculties count as legitimate tools for knowing?",
+        highlightTag: "Reason + Intuition + Emotion",
+        critical: {
+          badge: "Pure Reason & Formal Logic",
+          heading: "Strict Rationality & Deductive/Inductive Rules",
+          description: "Treats formal logic and analytical calculation as the sole trustworthy instruments of inquiry. Emotion, imagination, and intuition are viewed with suspicion as sources of bias or distraction.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "Evaluating a career change strictly by weighting salary and commute numbers in a spreadsheet while ignoring a persistent gut dread during the office tour."
+        },
+        constructive: {
+          badge: "Reason + Intuition, Emotion & Imagination",
+          heading: "Holistic, Multi-Faculty Epistemology",
+          description: "Retains rigorous reason and logic, but braids them together with conscious intuition, emotional attunement, and creative imagination as vital, co-equal partners in constructing knowledge.",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Combining the financial spreadsheet with your conscious intuitive read of team culture and imaginative projection of your future growth."
+        }
+      },
+      {
+        id: 2,
+        number: "02",
+        title: "Knowledge Paradigm",
+        subtitle: "Must valid thought be formalized and operationalized?",
+        highlightTag: "Scientific Paradigm vs. Holistic",
+        critical: {
+          badge: "Formalized & Operationalized",
+          heading: "The Strict Scientific Paradigm of Thought",
+          description: "Demands that valid knowledge be broken into discrete variables, formalized into explicit algorithms, and operationalized so any detached observer can replicate the exact steps.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "Insisting that a master baker's dough quality can be 100% captured by an automated factory specification sheet of grams and minutes."
+        },
+        constructive: {
+          badge: "Integrates Unanalyzable Knowing",
+          heading: "Hospitable to Non-Formalizable Insight",
+          description: "Recognizes that much of our deepest understanding—both tacit and intuitive—is unanalyzable and cannot be formalized or operationalized without losing its living meaning.",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Using recipes and thermometers alongside the unanalyzable sensory feel of how dough responds to today's humidity."
+        }
+      },
+      {
+        id: 3,
+        number: "03",
+        title: "Role of the Knower",
+        subtitle: "How does the thinker relate to what is known?",
+        highlightTag: "Detached vs. Relational",
+        critical: {
+          badge: "Detached, Objective Observer",
+          heading: "The 'View from Nowhere' Ideal",
+          description: "Assumes the ideal thinker stands outside the problem as a disembodied, autonomous spectator, stripping away personal history, bodily context, and relationship to the subject.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "A hospital administrator redesigning nursing shifts purely from throughput charts without ever shadowing nurses on the floor."
+        },
+        constructive: {
+          badge: "Embedded, Relational & Embodied",
+          heading: "Situated & Socially Connected Knower",
+          description: "Understands that knowers are embodied, historically situated beings who construct knowledge in relationship with others, their environment, and the subject matter itself.",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Co-designing clinical schedules by combining patient-flow data with the lived, embodied rhythms and relational insights of floor nurses."
+        }
+      },
+      {
+        id: 4,
+        number: "04",
+        title: "Unconscious / Embodied Skill",
+        subtitle: "Michael Polanyi’s Tacit Knowing",
+        highlightTag: "Polanyi's Tacit Dimension",
+        isSpotlightFactor: true,
+        critical: {
+          badge: "Overlooked Unless Explicit",
+          heading: "If You Can't State the Rule, It Doesn't Count",
+          description: "Tends to devalue know-how that cannot be articulated in propositional formulas. Embodied expertise is dismissed as mere habit until translated into formal procedures.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "Dismissing a veteran mechanic's instant recognition of an engine's subtle vibration because they haven't run a computerized diagnostic code yet."
+        },
+        constructive: {
+          badge: "Valued: 'We Know More Than We Can Tell'",
+          heading: "Honors Subsidiary, Embodied Experience",
+          description: "Embraces Polanyi's insight that tacit knowing is unanalyzable and operates beneath focal awareness—our body and accumulated experience integrate clues subconsciously.",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Riding a bicycle or reading a loved one's micro-expressions effortlessly through subsidiary bodily cues we could never fully write down."
+        }
+      },
+      {
+        id: 5,
+        number: "05",
+        title: "Conscious Non-Linear Insight",
+        subtitle: "Noddings & Shore’s Intuition (1984, p. 54)",
+        highlightTag: "Noddings & Shore (1984, p. 54)",
+        isSpotlightFactor: true,
+        critical: {
+          badge: "Dismissed as 'Unscientific' Guessing",
+          heading: "Excluded from the Scientific Paradigm",
+          description: "Because intuition cannot be formalized or operationalized into linear steps, strict critical thinking sidelines it as irrational mysticism or unverified hunch.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "Ignoring a sudden, crystal-clear architectural realization during a quiet walk because it didn't emerge from a step-by-step deduction."
+        },
+        constructive: {
+          badge: "Celebrated as 'Fully Conscious' Mode",
+          heading: "Receptive, Hyper-Present Holistic Seeing",
+          description: "Following Noddings & Shore (1984, p. 54), recognizes that while intuition is unanalyzable like tacit knowing, 'no mental mode could be more fully conscious than the intuitive mode.'",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Being completely awake and receptive to a complex problem until the whole pattern suddenly clicks into vivid, conscious clarity."
+        }
+      },
+      {
+        id: 6,
+        number: "06",
+        title: "Language & Expression",
+        subtitle: "Can formal language capture all valid thought?",
+        highlightTag: "Limits of Formal Language",
+        critical: {
+          badge: "Language Captures All Valid Thought",
+          heading: "Propositional Transparency Assumption",
+          description: "Assumes that any genuine knowledge can and must be translated without loss into literal, unambiguous verbal propositions or mathematical symbols.",
+          exampleTitle: "Daily-Life Example (Critical Only):",
+          example: "Rejecting a student's deep conceptual grasp of a physics phenomenon because they explain it through an analogy and sketch rather than textbook jargon."
+        },
+        constructive: {
+          badge: "Recognizes Language Can Be a Barrier",
+          heading: "Honors Insights That Resist Formalization",
+          description: "Acknowledges that literal language is a powerful tool but also a filter that can constrain thought; values metaphor, art, gesture, and pre-verbal intuitive grasp.",
+          exampleTitle: "Daily-Life Example (Constructive):",
+          example: "Using visual metaphors, prototypes, and shared reflection when strict technical vocabulary fails to capture a novel breakthrough."
+        }
+      }
+    ];
+
+    /**
+     * ========================================================================
+     * 2. DATASET: THE SPECTRUM OF KNOWING (3 Modes + Constructive Umbrella)
+     * ========================================================================
+     */
+    const spectrumModes = {
+      scientific: {
+        badge: "Mode 1 • Scientific / Analytical Paradigm",
+        badgeClass: "bg-sky-100 text-sky-800",
+        title: "Scientific / Analytical Mode",
+        theorist: "Traditional Critical Paradigm",
+        quoteHighlightId: "phrase-scientific",
+        quoteHighlightClass: "active-scientific",
+        meters: {
+          formalizable: {
+            pill: "YES — Formalized & Operationalized",
+            pillClass: "bg-sky-100 text-sky-800",
+            width: "95%",
+            barClass: "bg-sky-500",
+            desc: "Requires explicit definitions, measurable variables, and step-by-step operational rules that can be replicated independently."
+          },
+          scientificFit: {
+            pill: "YES — Defines the Standard",
+            pillClass: "bg-sky-100 text-sky-800",
+            width: "95%",
+            barClass: "bg-sky-600",
+            desc: "This mode is the benchmark of the scientific paradigm of thought—linear, verifiable, and analytically decomposable."
+          },
+          consciousness: {
+            pill: "High / Focal Analytical Awareness",
+            pillClass: "bg-sky-100 text-sky-800",
+            width: "78%",
+            barClass: "bg-sky-500",
+            desc: "We are consciously aware of each step as we calculate or deduce, focusing narrowly on explicit parts and rules."
+          }
+        },
+        takeawayClass: "bg-sky-50 border-sky-200 text-sky-950",
+        takeawayHtml: "<strong>Analytical Strength &amp; Limit:</strong> Essential for verification and testing, but if treated as the <em>only</em> valid way of knowing, it blinds us to insights that cannot be reduced to formulas."
+      },
+      tacit: {
+        badge: "Mode 2 • Michael Polanyi",
+        badgeClass: "bg-emerald-100 text-emerald-800",
+        title: "Tacit Knowing (Embodied & Subsidiary)",
+        theorist: "Michael Polanyi (1966)",
+        quoteHighlightId: "phrase-tacit",
+        quoteHighlightClass: "active-tacit",
+        meters: {
+          formalizable: {
+            pill: "NO — Unanalyzable & Non-Formalizable",
+            pillClass: "bg-rose-100 text-rose-800",
+            width: "12%",
+            barClass: "bg-rose-500",
+            desc: "Cannot be fully captured in explicit rules or operationalized checklists ('We can know more than we can tell')."
+          },
+          scientificFit: {
+            pill: "NO — Outside Strict Formalism",
+            pillClass: "bg-rose-100 text-rose-800",
+            width: "15%",
+            barClass: "bg-rose-500",
+            desc: "Does not fit the strict scientific paradigm because breaking a tacit skill into isolated parts often paralyzes the skill itself."
+          },
+          consciousness: {
+            pill: "Subsidiary / Subconscious Awareness",
+            pillClass: "bg-emerald-100 text-emerald-800",
+            width: "25%",
+            barClass: "bg-emerald-500",
+            desc: "Operates in the background (subsidiary awareness). When you ride a bike or play piano, your body knows how without conscious calculation."
+          }
+        },
+        takeawayClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
+        takeawayHtml: "<strong>How Polanyi Compares to Noddings &amp; Shore:</strong> Polanyi showed that valid knowing can be <em>unanalyzable and non-formalizable</em>. Yet for Polanyi, tacit knowing remains largely <strong>subconscious/subsidiary</strong>."
+      },
+      intuition: {
+        badge: "Mode 3 • Noddings & Shore (1984, p. 54)",
+        badgeClass: "bg-amber-100 text-amber-900",
+        title: "The Intuitive Mode (Conscious Receptive Insight)",
+        theorist: "Noddings & Shore (1984, p. 54)",
+        quoteHighlightId: "phrase-intuition",
+        quoteHighlightClass: "active-intuition",
+        meters: {
+          formalizable: {
+            pill: "NO — Unanalyzable & Non-Formalizable",
+            pillClass: "bg-rose-100 text-rose-800",
+            width: "12%",
+            barClass: "bg-rose-500",
+            desc: "Shares Polanyi's quality: intuition is unanalyzable and is not something that can be formalized and operationalized."
+          },
+          scientificFit: {
+            pill: "NO — Transcends Scientific Paradigm",
+            pillClass: "bg-rose-100 text-rose-800",
+            width: "15%",
+            barClass: "bg-rose-500",
+            desc: "As Noddings & Shore explicitly state: 'It does not fit the scientific paradigm of thought.'"
+          },
+          consciousness: {
+            pill: "MAXIMUM — 'More Fully Conscious Than Any Mode'",
+            pillClass: "bg-amber-200 text-amber-950",
+            width: "100%",
+            barClass: "bg-amber-500",
+            desc: "Unlike Polanyi's subconscious tacit knowing, intuition is hyper-present and awake: 'No mental mode could be more fully conscious than the intuitive mode' (1984, p. 54)."
+          }
+        },
+        takeawayClass: "bg-amber-50 border-amber-300 text-amber-950",
+        takeawayHtml: "<strong>The Key Breakthrough (1984, p. 54):</strong> Intuition is <em>not</em> an unconscious reflex. It is a state of heightened, wide-awake, receptive consciousness where we engage an object or problem directly without a formal filter."
+      },
+      constructive: {
+        badge: "Synthesis • Barbara Thayer-Bacon",
+        badgeClass: "bg-indigo-100 text-indigo-800",
+        title: "Constructive Thinking (The Integrative Umbrella)",
+        theorist: "Barbara Thayer-Bacon",
+        quoteHighlightId: "ALL",
+        quoteHighlightClass: "active-constructive",
+        meters: {
+          formalizable: {
+            pill: "BRIDGES BOTH — Formal + Unanalyzable",
+            pillClass: "bg-indigo-100 text-indigo-800",
+            width: "100%",
+            barClass: "bg-indigo-600",
+            desc: "Uses formal rules and metrics where helpful, while honoring unanalyzable tacit skill and intuitive insight."
+          },
+          scientificFit: {
+            pill: "EXPANDS PARADIGM — Inclusive Epistemology",
+            pillClass: "bg-indigo-100 text-indigo-800",
+            width: "100%",
+            barClass: "bg-indigo-600",
+            desc: "Includes scientific critical thinking inside a larger, relational tapestry that also validates non-formalizable knowing."
+          },
+          consciousness: {
+            pill: "FULL SPECTRUM — Subsidiary + Focal + Intuitive",
+            pillClass: "bg-indigo-100 text-indigo-800",
+            width: "100%",
+            barClass: "bg-indigo-600",
+            desc: "Draws fluidly upon subconscious bodily know-how (Polanyi), analytical logic, and fully conscious intuition (Noddings & Shore)."
+          }
+        },
+        takeawayClass: "bg-indigo-50 border-indigo-200 text-indigo-950",
+        takeawayHtml: "<strong>Why Constructive Thinking Matters:</strong> Instead of forcing human intelligence into a single box, Constructive Thinking weaves together <em>Analytical Logic</em> + <em>Tacit Knowing</em> + <em>Conscious Intuition</em>."
+      }
+    };
+
+    /**
+     * ========================================================================
+     * 3. DATASET: REAL-WORLD SCENARIOS (3 Relatable Cases x 4 Lenses)
+     * ========================================================================
+     */
+    const scenariosData = [
+      {
+        tag: "Scenario 01 • Athletics & Embodied Pacing",
+        title: "Pacing an Endurance Race at Kilometer 32",
+        context: "You are 32 km into a marathon on a warm, gusty afternoon. Your GPS watch says your target pace is 4:45/km and heart rate is 166 bpm, right on your spreadsheet plan—yet the final 10 km climb looms ahead.",
+        lenses: {
+          scientific: {
+            title: "Pure Critical / Scientific Lens",
+            subtitle: "Formalized Metrics & Explicit Rules",
+            badge: "Formalized & Operationalized",
+            color: "sky",
+            response: "Follows the pre-calculated race algorithm strictly: 'Heart rate is 166 bpm (below the 168 bpm threshold) and pace is 4:45/km. The formula says maintain exact output for 6 more kilometers.' Ignores any sensation that cannot be quantified on the watch."
+          },
+          tacit: {
+            title: "Tacit Knowing (Polanyi)",
+            subtitle: "Subconscious, Subsidiary Bodily Adjustment",
+            badge: "Unanalyzable • Subconscious",
+            color: "emerald",
+            response: "Without conscious calculation, your feet and core automatically shorten your stride by two centimeters on the camber of the road and relax your shoulders into the crosswind—an embodied skill honed over thousands of miles that you couldn't formalize into equations."
+          },
+          intuition: {
+            title: "Conscious Intuition (Noddings & Shore)",
+            subtitle: "Fully Conscious, Receptive Holistic Flash",
+            badge: "Unanalyzable • Fully Conscious",
+            color: "amber",
+            response: "In a moment of crystal-clear, hyper-present awareness—tuning into your breathing, the heat radiating off the asphalt, and the rhythm of the pack—you consciously realize right now: 'If I hold 4:45 up this exposed ridge, I will redline in 12 minutes; easing 6 seconds/km now will unlock a strong finish.'"
+          },
+          constructive: {
+            title: "The Constructive Thinker's Synthesis",
+            subtitle: "Weaving Data + Tacit Feel + Conscious Intuition",
+            badge: "Thayer-Bacon Synthesis",
+            color: "indigo",
+            response: "Integrates all three: checks the GPS heart-rate trend (Scientific), trusts the body's automatic biomechanics in the wind (Polanyi's Tacit), and honors the wide-awake intuitive perception of how heat and terrain are interacting (Noddings & Shore)—adjusting pace wisely before the metrics even show distress."
+          }
+        }
+      },
+      {
+        tag: "Scenario 02 • Software & Systems Engineering",
+        title: "Debugging an Elusive Distributed System Outage",
+        context: "A cloud platform experiences intermittent 2-second latency spikes every few hours. All standard CPU, memory, and unit-test dashboards report '100% Green / Passing'.",
+        lenses: {
+          scientific: {
+            title: "Pure Critical / Scientific Lens",
+            subtitle: "Formalized Metrics & Explicit Rules",
+            badge: "Formalized & Operationalized",
+            color: "sky",
+            response: "Runs through the standard operationalized runbook step-by-step: checks CPU thresholds, memory alerts, and automated test suites. Because every formalized metric is within nominal bounds, the checklist concludes 'No anomaly detected in service tier.'"
+          },
+          tacit: {
+            title: "Tacit Knowing (Polanyi)",
+            subtitle: "Subconscious, Subsidiary Experiential Skill",
+            badge: "Unanalyzable • Subconscious",
+            color: "emerald",
+            response: "As a senior engineer scrolls rapidly through thousands of raw log lines, their fingers pause almost automatically on a subtly irregular timestamp rhythm—an unconscious pattern-recognition built from years of living with the codebase."
+          },
+          intuition: {
+            title: "Conscious Intuition (Noddings & Shore)",
+            subtitle: "Fully Conscious, Receptive Holistic Flash",
+            badge: "Unanalyzable • Fully Conscious",
+            color: "amber",
+            response: "Stepping back from the narrow runbook and holding the whole architecture in wide-awake, receptive consciousness, the engineer suddenly sees the gestalt: two microservices are entering a synchronized retry wave whenever a background cache expires."
+          },
+          constructive: {
+            title: "The Constructive Thinker's Synthesis",
+            subtitle: "Weaving Data + Tacit Feel + Conscious Intuition",
+            badge: "Thayer-Bacon Synthesis",
+            color: "indigo",
+            response: "Uses the conscious intuitive insight to form a bold new hypothesis, relies on tacit log-reading fluency to locate the exact trace, and then applies rigorous scientific instrumentation to formally verify and patch the retry storm."
+          }
+        }
+      },
+      {
+        tag: "Scenario 03 • Education & Leadership",
+        title: "Mentoring a Student or Teammate in Office Hours",
+        context: "A capable graduate student presents their research proposal. On paper, every rubric requirement is checked off, and they say 'Everything is going fine,' yet the project feels stalled.",
+        lenses: {
+          scientific: {
+            title: "Pure Critical / Scientific Lens",
+            subtitle: "Formalized Metrics & Explicit Rules",
+            badge: "Formalized & Operationalized",
+            color: "sky",
+            response: "Evaluates the proposal strictly against the standardized 10-point rubric: literature review has 25 citations, methodology is valid, timeline is filled in. Marks the advising session 'Complete—Satisfactory' and moves on."
+          },
+          tacit: {
+            title: "Tacit Knowing (Polanyi)",
+            subtitle: "Subconscious, Subsidiary Relational Cues",
+            badge: "Unanalyzable • Subconscious",
+            color: "emerald",
+            response: "Without consciously analyzing why, the mentor's own posture softens and their voice slows down in response to micro-tensions in the student's cadence and eye contact."
+          },
+          intuition: {
+            title: "Conscious Intuition (Noddings & Shore)",
+            subtitle: "Fully Conscious, Receptive Attunement",
+            badge: "Unanalyzable • Fully Conscious",
+            color: "amber",
+            response: "Practicing Noddings' receptive, fully conscious presence—listening deeply beyond the rubric—the mentor vividly perceives that the student no longer feels connected to the research question and is afraid to admit they want to pivot."
+          },
+          constructive: {
+            title: "The Constructive Thinker's Synthesis",
+            subtitle: "Weaving Rubric + Tacit Warmth + Conscious Intuition",
+            badge: "Thayer-Bacon Synthesis",
+            color: "indigo",
+            response: "Acknowledges the strong analytical structure of the draft (Critical), creates a safe relational space (Tacit), and gently asks an open question born of conscious intuition—helping the student reshape the topic into something both rigorous and deeply meaningful."
+          }
+        }
+      }
+    ];
+
+    /**
+     * ========================================================================
+     * 4. DATASET: SELF-CHECK QUIZ QUESTIONS
+     * ========================================================================
+     */
+    const quizQuestions = [
+      {
+        id: 0,
+        question: "According to Noddings & Shore (1984, p. 54), what quality does Intuition SHARE with Polanyi's Tacit Knowing?",
+        options: [
+          { text: "Both can be easily formalized into scientific algorithms.", correct: false, feedback: "Not quite—neither intuition nor tacit knowing fits the strict scientific paradigm of formalization." },
+          { text: "Both are unanalyzable and cannot be formalized or operationalized.", correct: true, feedback: "Exact match! Both resist being broken down into formalized, operationalized scientific rules." },
+          { text: "Both operate completely outside of conscious awareness.", correct: false, feedback: "Careful: Polanyi's tacit knowing is subconscious/subsidiary, whereas Noddings & Shore emphasize that intuition is fully conscious." }
+        ]
+      },
+      {
+        id: 1,
+        question: "How does Noddings & Shore's view of Intuition DIFFER from Polanyi's Tacit Knowing?",
+        options: [
+          { text: "Intuition is something we are fully conscious of ('No mental mode could be more fully conscious').", correct: true, feedback: "Spot on! That is the exact distinction on p. 54: unlike tacit knowing, the intuitive mode is maximally conscious." },
+          { text: "Intuition only applies to laboratory physics and formal mathematics.", correct: false, feedback: "Incorrect—Noddings & Shore explore intuition across all human learning and relational understanding." },
+          { text: "Intuition rejects reason and requires thinkers to abandon critical logic.", correct: false, feedback: "Incorrect—in Constructive Thinking, intuition complements and enriches reason rather than destroying it." }
+        ]
+      },
+      {
+        id: 2,
+        question: "How does Barbara Thayer-Bacon's Constructive Thinking treat Traditional Critical Thinking?",
+        options: [
+          { text: "It proves that logic and scientific metrics are useless.", correct: false, feedback: "Constructive thinking still values logic and evidence—it simply refuses to treat them as the ONLY valid tools." },
+          { text: "It expands critical thinking to weave reason together with intuition, tacit knowing, emotion, and imagination.", correct: true, feedback: "Correct! Constructive Thinking is an inclusive umbrella that integrates analytical reason with embodied, intuitive, and relational knowing." },
+          { text: "It replaces human judgment with automated operational checklists.", correct: false, feedback: "That would be strict formalism; Constructive Thinking highlights the embedded, relational human knower." }
+        ]
+      }
+    ];
+
+    // Application State
+    let currentParadigm = 'compare'; // 'critical' | 'constructive' | 'compare'
+    let currentSpectrumMode = 'intuition'; // 'scientific' | 'tacit' | 'intuition' | 'constructive'
+    let currentScenarioIndex = 0;
+    let currentScenarioLensFilter = 'all';
+    let quizAnswers = {};
+
+    /**
+     * Updates the main 6-Factor Comparison Grid based on selected paradigm view
+     */
+    function setGlobalParadigm(mode) {
+      currentParadigm = mode;
+
+      // Update toggle button styles
+      const modes = ['critical', 'constructive', 'compare'];
+      modes.forEach(m => {
+        const btn = document.getElementById(`btn-view-${m}`);
+        if (!btn) return;
+        if (m === mode) {
+          btn.className = "paradigm-toggle-btn px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 bg-white text-slate-900 shadow-sm border border-slate-200/80 cursor-pointer";
+        } else {
+          btn.className = "paradigm-toggle-btn px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer";
+        }
+      });
+
+      // Update Summary Banner
+      const banner = document.getElementById('paradigm-summary-banner');
+      if (mode === 'critical') {
+        banner.className = "mb-6 rounded-2xl p-4 sm:p-5 border bg-sky-50/90 border-sky-200 text-sky-950 transition-all duration-300";
+        banner.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg bg-sky-600 text-white text-xs font-bold uppercase tracking-wider">Traditional Critical Lens</span>
+              <span class="font-bold text-sm sm:text-base">Scientific / Rational Paradigm</span>
+            </div>
+            <span class="text-xs text-sky-800 font-medium">Focus: Formalization, operationalization &amp; detached objectivity</span>
+          </div>
+          <p class="text-xs sm:text-sm text-sky-900/90 mt-2 leading-relaxed">
+            In this mode, valid thinking is equated with the scientific paradigm: ideas must be analyzable, formalized into explicit rules, and operationalized. Both Polanyi’s tacit knowing and Noddings &amp; Shore’s conscious intuition are sidelined because they cannot be reduced to formal steps.
+          </p>
+        `;
+      } else if (mode === 'constructive') {
+        banner.className = "mb-6 rounded-2xl p-4 sm:p-5 border bg-indigo-50/90 border-indigo-200 text-indigo-950 transition-all duration-300";
+        banner.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider">Constructive Thinking Lens</span>
+              <span class="font-bold text-sm sm:text-base">Holistic / Relational Paradigm (Thayer-Bacon)</span>
+            </div>
+            <span class="text-xs text-indigo-800 font-medium">Focus: Reason + Intuition + Tacit Knowing + Emotion + Imagination</span>
+          </div>
+          <p class="text-xs sm:text-sm text-indigo-900/90 mt-2 leading-relaxed">
+            Constructive Thinking keeps critical logic while expanding the circle of valid knowing to include embedded relational context, <strong>Polanyi’s subsidiary tacit skill</strong>, and <strong>Noddings &amp; Shore’s fully conscious intuitive mode</strong>.
+          </p>
+        `;
+      } else {
+        banner.className = "mb-6 rounded-2xl p-4 sm:p-5 border bg-gradient-to-r from-sky-50 via-indigo-50 to-amber-50 border-indigo-200/80 text-slate-900 transition-all duration-300";
+        banner.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-bold uppercase tracking-wider">Side-by-Side Comparison</span>
+              <span class="font-bold text-sm sm:text-base">Comparing Both Paradigms Across All 6 Epistemological Factors</span>
+            </div>
+            <span class="text-xs text-indigo-700 font-semibold">Notice Cards #04 (Polanyi) &amp; #05 (Noddings &amp; Shore)</span>
+          </div>
+        `;
+      }
+
+      // Render the 6 Factor Cards
+      const grid = document.getElementById('factors-grid');
+      grid.innerHTML = factorsData.map(factor => renderFactorCard(factor, mode)).join('');
+    }
+
+    function renderFactorCard(factor, mode) {
+      const spotlightRing = factor.isSpotlightFactor
+        ? 'ring-2 ring-amber-400/70 border-amber-300'
+        : 'border-slate-200/90';
+
+      const spotlightRibbon = factor.isSpotlightFactor
+        ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 text-[11px] font-bold">
+             ★ Excerpt Spotlight
+           </span>`
+        : `<span class="text-[11px] font-mono text-slate-400">${factor.highlightTag}</span>`;
+
+      if (mode === 'critical') {
+        return `
+          <article class="factor-card bg-white rounded-2xl p-5 sm:p-6 border ${spotlightRing} shadow-2xs flex flex-col justify-between animate-fade-in">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-sky-100 text-sky-800">Factor ${factor.number}</span>
+                ${spotlightRibbon}
+              </div>
+              <h3 class="text-lg font-bold text-slate-900">${factor.title}</h3>
+              <p class="text-xs text-slate-500 mb-4">${factor.subtitle}</p>
+
+              <div class="p-3.5 rounded-xl bg-sky-50/70 border border-sky-200/80 mb-4">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-sky-700 mb-1">
+                  ${factor.critical.badge}
+                </div>
+                <div class="text-sm font-bold text-slate-900 mb-1.5">${factor.critical.heading}</div>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${factor.critical.description}</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200/80">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">${factor.critical.exampleTitle}</div>
+              <p class="text-xs text-slate-600 leading-relaxed">${factor.critical.example}</p>
+            </div>
+          </article>
+        `;
+      }
+
+      if (mode === 'constructive') {
+        return `
+          <article class="factor-card bg-white rounded-2xl p-5 sm:p-6 border ${spotlightRing} shadow-2xs flex flex-col justify-between animate-fade-in">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-800">Factor ${factor.number}</span>
+                ${spotlightRibbon}
+              </div>
+              <h3 class="text-lg font-bold text-slate-900">${factor.title}</h3>
+              <p class="text-xs text-slate-500 mb-4">${factor.subtitle}</p>
+
+              <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-200/80 mb-4">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 mb-1">
+                  ${factor.constructive.badge}
+                </div>
+                <div class="text-sm font-bold text-slate-900 mb-1.5">${factor.constructive.heading}</div>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${factor.constructive.description}</p>
+              </div>
+            </div>
+
+            <div class="bg-amber-50/60 rounded-xl p-3.5 border border-amber-200/80">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-amber-800 mb-1">${factor.constructive.exampleTitle}</div>
+              <p class="text-xs text-slate-700 leading-relaxed">${factor.constructive.example}</p>
+            </div>
+          </article>
+        `;
+      }
+
+      // Side-by-Side Comparison View
+      return `
+        <article class="factor-card bg-white rounded-2xl p-5 sm:p-6 border ${spotlightRing} shadow-2xs flex flex-col justify-between animate-fade-in">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-slate-900 text-white">Factor ${factor.number}</span>
+              ${spotlightRibbon}
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">${factor.title}</h3>
+            <p class="text-xs text-slate-500 mb-4">${factor.subtitle}</p>
+
+            <!-- Critical Box -->
+            <div class="p-3.5 rounded-xl bg-sky-50/60 border border-sky-200/80 mb-3">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-sky-700">Traditional Critical</span>
+                <span class="text-[10px] font-semibold text-sky-800 bg-sky-100 px-2 py-0.5 rounded-full">${factor.critical.badge}</span>
+              </div>
+              <p class="text-xs text-slate-700 leading-relaxed">${factor.critical.description}</p>
+            </div>
+
+            <!-- Constructive Box -->
+            <div class="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-200/90 mb-3">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-700">Constructive Thinking</span>
+                <span class="text-[10px] font-semibold text-indigo-800 bg-indigo-100 px-2 py-0.5 rounded-full">${factor.constructive.badge}</span>
+              </div>
+              <p class="text-xs text-slate-800 leading-relaxed">${factor.constructive.description}</p>
+            </div>
+          </div>
+
+          <!-- Concrete Daily-Life Contrast Footer -->
+          <div class="pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
+            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+              Concrete Daily-Life Shift:
+            </div>
+            <p class="leading-relaxed">${factor.constructive.example}</p>
+          </div>
+        </article>
+      `;
+    }
+
+    /**
+     * Updates Section 2: The Spectrum of Knowing Spotlight
+     */
+    function selectSpectrumMode(modeKey) {
+      currentSpectrumMode = modeKey;
+      const data = spectrumModes[modeKey];
+      if (!data) return;
+
+      // 1. Update Mode Selector Buttons
+      const allKeys = ['scientific', 'tacit', 'intuition', 'constructive'];
+      const activeBorderMap = {
+        scientific: 'border-sky-500 bg-sky-50/60 ring-2 ring-sky-500/20 shadow-xs',
+        tacit: 'border-emerald-500 bg-emerald-50/60 ring-2 ring-emerald-500/20 shadow-xs',
+        intuition: 'border-amber-500 bg-amber-50/70 ring-2 ring-amber-500/25 shadow-xs',
+        constructive: 'border-indigo-600 bg-indigo-50/60 ring-2 ring-indigo-500/20 shadow-xs'
+      };
+
+      allKeys.forEach(k => {
+        const btn = document.getElementById(`mode-btn-${k}`);
+        if (!btn) return;
+        if (k === modeKey) {
+          btn.className = `p-4 rounded-2xl border-2 text-left transition-all cursor-pointer flex flex-col justify-between ${activeBorderMap[k]}`;
+        } else {
+          btn.className = "p-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all cursor-pointer flex flex-col justify-between";
+        }
+      });
+
+      // 2. Highlight Corresponding Phrase(s) in the Primary Excerpt
+      const phraseIds = ['phrase-tacit', 'phrase-scientific', 'phrase-intuition'];
+      phraseIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.className = 'quote-phrase';
+        if (data.quoteHighlightId === 'ALL' || data.quoteHighlightId === id) {
+          el.classList.add(data.quoteHighlightClass);
+        }
+      });
+
+      // 3. Update Header & 3 Dimension Meters
+      const badgeEl = document.getElementById('spotlight-active-badge');
+      badgeEl.className = `inline-block text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-1 ${data.badgeClass}`;
+      badgeEl.textContent = data.badge;
+
+      document.getElementById('spotlight-active-title').textContent = data.title;
+      document.getElementById('spotlight-active-theorist').textContent = data.theorist;
+
+      // Meter 1: Formalizable
+      const m1Pill = document.getElementById('meter-1-pill');
+      m1Pill.className = `text-xs font-bold px-2.5 py-0.5 rounded-full ${data.meters.formalizable.pillClass}`;
+      m1Pill.textContent = data.meters.formalizable.pill;
+      const m1Bar = document.getElementById('meter-1-bar');
+      m1Bar.className = `meter-fill h-full rounded-full ${data.meters.formalizable.barClass}`;
+      m1Bar.style.width = data.meters.formalizable.width;
+      document.getElementById('meter-1-desc').textContent = data.meters.formalizable.desc;
+
+      // Meter 2: Scientific Fit
+      const m2Pill = document.getElementById('meter-2-pill');
+      m2Pill.className = `text-xs font-bold px-2.5 py-0.5 rounded-full ${data.meters.scientificFit.pillClass}`;
+      m2Pill.textContent = data.meters.scientificFit.pill;
+      const m2Bar = document.getElementById('meter-2-bar');
+      m2Bar.className = `meter-fill h-full rounded-full ${data.meters.scientificFit.barClass}`;
+      m2Bar.style.width = data.meters.scientificFit.width;
+      document.getElementById('meter-2-desc').textContent = data.meters.scientificFit.desc;
+
+      // Meter 3: Level of Conscious Awareness
+      const m3Pill = document.getElementById('meter-3-pill');
+      m3Pill.className = `text-xs font-bold px-2.5 py-0.5 rounded-full ${data.meters.consciousness.pillClass}`;
+      m3Pill.textContent = data.meters.consciousness.pill;
+      const m3Bar = document.getElementById('meter-3-bar');
+      m3Bar.className = `meter-fill h-full rounded-full ${data.meters.consciousness.barClass}`;
+      m3Bar.style.width = data.meters.consciousness.width;
+      document.getElementById('meter-3-desc').textContent = data.meters.consciousness.desc;
+
+      // Takeaway Box
+      const takeawayBox = document.getElementById('spotlight-takeaway-box');
+      takeawayBox.className = `mt-5 p-4 rounded-xl border text-xs sm:text-sm leading-relaxed ${data.takeawayClass}`;
+      takeawayBox.innerHTML = data.takeawayHtml;
+
+      // 4. Update SVG Pulse Rings & Umbrella Highlight
+      ['scientific', 'tacit', 'intuition'].forEach(nodeKey => {
+        const ring = document.getElementById(`ring-${nodeKey}`);
+        if (!ring) return;
+        if (modeKey === nodeKey || modeKey === 'constructive') {
+          ring.classList.remove('hidden');
+        } else {
+          ring.classList.add('hidden');
+        }
+      });
+
+      const umbrella = document.getElementById('svg-umbrella');
+      if (umbrella) {
+        if (modeKey === 'constructive') {
+          umbrella.setAttribute('fill', 'rgba(124, 58, 237, 0.28)');
+          umbrella.setAttribute('stroke-width', '2.75');
+        } else {
+          umbrella.setAttribute('fill', 'rgba(124, 58, 237, 0.10)');
+          umbrella.setAttribute('stroke-width', '1.5');
+        }
+      }
+    }
+
+    /**
+     * Updates Section 3: Real-World Scenario Explorer
+     */
+    function selectScenario(index) {
+      currentScenarioIndex = index;
+      const scenario = scenariosData[index];
+
+      // Update Tab Buttons
+      scenariosData.forEach((_, idx) => {
+        const btn = document.getElementById(`scenario-tab-${idx}`);
+        if (!btn) return;
+        if (idx === index) {
+          btn.className = "scenario-tab-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/50 shadow-xs text-left transition-all cursor-pointer flex items-start gap-3.5";
+        } else {
+          btn.className = "scenario-tab-btn p-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all cursor-pointer flex items-start gap-3.5";
+        }
+      });
+
+      // Update Context Header
+      document.getElementById('scenario-tag').textContent = scenario.tag;
+      document.getElementById('scenario-title').textContent = scenario.title;
+      document.getElementById('scenario-context').textContent = scenario.context;
+
+      renderScenarioLenses();
+    }
+
+    function highlightScenarioLens(lensFilter) {
+      currentScenarioLensFilter = lensFilter;
+      const filters = ['all', 'scientific', 'tacit', 'intuition'];
+      filters.forEach(f => {
+        const btn = document.getElementById(`lens-filter-${f}`);
+        if (!btn) return;
+        if (f === lensFilter) {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white cursor-pointer transition";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer transition";
+        }
+      });
+      renderScenarioLenses();
+    }
+
+    function renderScenarioLenses() {
+      const scenario = scenariosData[currentScenarioIndex];
+      const grid = document.getElementById('scenario-lenses-grid');
+      const entries = [
+        { key: 'scientific', data: scenario.lenses.scientific, border: 'border-sky-200 bg-sky-50/40', badgeBg: 'bg-sky-100 text-sky-800', icon: '01' },
+        { key: 'tacit', data: scenario.lenses.tacit, border: 'border-emerald-200 bg-emerald-50/40', badgeBg: 'bg-emerald-100 text-emerald-800', icon: '02' },
+        { key: 'intuition', data: scenario.lenses.intuition, border: 'border-amber-300 bg-amber-50/50', badgeBg: 'bg-amber-100 text-amber-900', icon: '03' },
+        { key: 'constructive', data: scenario.lenses.constructive, border: 'border-indigo-300 bg-indigo-50/50', badgeBg: 'bg-indigo-600 text-white', icon: '★' }
+      ];
+
+      grid.innerHTML = entries.map(item => {
+        const isDimmed = currentScenarioLensFilter !== 'all' && currentScenarioLensFilter !== item.key && item.key !== 'constructive';
+        const dimClass = isDimmed ? 'opacity-40 scale-[0.99]' : 'opacity-100';
+        const highlightRing = (currentScenarioLensFilter === item.key) ? 'ring-2 ring-slate-900 shadow-md' : '';
+
+        return `
+          <div class="rounded-2xl p-5 border ${item.border} ${dimClass} ${highlightRing} transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2.5">
+                <span class="text-xs font-bold px-2.5 py-1 rounded-full ${item.badgeBg}">
+                  ${item.data.badge}
+                </span>
+                <span class="text-xs font-mono font-bold text-slate-400">Lens ${item.icon}</span>
+              </div>
+              <h4 class="text-base sm:text-lg font-bold text-slate-900">${item.data.title}</h4>
+              <div class="text-xs font-medium text-slate-500 mb-3">${item.data.subtitle}</div>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.data.response}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renders and handles Section 4: Self-Check Quiz
+     */
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const answeredCount = Object.keys(quizAnswers).length;
+      const correctCount = Object.values(quizAnswers).filter(a => a.isCorrect).length;
+
+      const scoreBadge = document.getElementById('quiz-score-badge');
+      scoreBadge.textContent = `Score: ${correctCount} / ${quizQuestions.length} Correct (${answeredCount} Answered)`;
+
+      container.innerHTML = quizQuestions.map((q, qIdx) => {
+        const userAns = quizAnswers[q.id];
+        return `
+          <div class="bg-slate-800/90 rounded-2xl p-5 border border-slate-700 flex flex-col justify-between">
+            <div>
+              <div class="text-xs font-mono uppercase tracking-wider text-indigo-300 mb-2">Question 0${qIdx + 1}</div>
+              <h3 class="text-sm sm:text-base font-bold text-white mb-4 leading-snug">${q.question}</h3>
+              <div class="space-y-2.5">
+                ${q.options.map((opt, oIdx) => {
+                  let btnStyle = "border-slate-700 bg-slate-900/70 hover:bg-slate-900 text-slate-200";
+                  if (userAns !== undefined) {
+                    if (opt.correct) {
+                      btnStyle = "border-emerald-400 bg-emerald-950/80 text-emerald-200 font-semibold";
+                    } else if (userAns.selectedIdx === oIdx && !opt.correct) {
+                      btnStyle = "border-rose-400 bg-rose-950/80 text-rose-200";
+                    } else {
+                      btnStyle = "border-slate-800 bg-slate-900/30 text-slate-500";
+                    }
+                  }
+                  return `
+                    <button
+                      onclick="answerQuiz(${q.id}, ${oIdx})"
+                      class="w-full text-left p-3 rounded-xl border text-xs leading-relaxed transition cursor-pointer ${btnStyle}"
+                    >
+                      ${opt.text}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            ${userAns !== undefined ? `
+              <div class="mt-4 p-3 rounded-xl text-xs leading-relaxed ${userAns.isCorrect ? 'bg-emerald-950/90 border border-emerald-500/40 text-emerald-200' : 'bg-amber-950/90 border border-amber-500/40 text-amber-200'}">
+                ${userAns.feedback}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function answerQuiz(questionId, optionIdx) {
+      const q = quizQuestions.find(item => item.id === questionId);
+      if (!q) return;
+      const chosen = q.options[optionIdx];
+      quizAnswers[questionId] = {
+        selectedIdx: optionIdx,
+        isCorrect: chosen.correct,
+        feedback: chosen.feedback
+      };
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      quizAnswers = {};
+      renderQuiz();
+    }
+
+    /**
+     * Copies the Noddings & Shore (1984, p. 54) excerpt to clipboard using execCommand for iframe compatibility
+     */
+    function copyExcerptToClipboard() {
+      const text = `Intuition, as Noddings and Shore describe, shares the qualities that Polanyi mentioned with tacit knowing, in that it is unanalyzable and not something that can be formalized and operationalized. It does not fit the scientific paradigm of thought. And yet, unlike Polanyi, intuition is something that we are conscious of. “No mental mode could be more fully conscious than the intuitive mode” (1984, p. 54).`;
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        const label = document.getElementById('copy-excerpt-label');
+        label.textContent = 'Copied Excerpt (1984, p. 54)!';
+        setTimeout(() => {
+          label.textContent = 'Copy Exact Citation (p. 54)';
+        }, 2200);
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setGlobalParadigm('compare');
+      selectSpectrumMode('intuition');
+      selectScenario(0);
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>
