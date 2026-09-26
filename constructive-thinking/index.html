@@ -187,7 +187,7 @@
           <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
           Intuition &amp; Tacit Spotlight
         </a>
-        <a href="#section-scenarios" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Real-World Scenarios</a>
+        <a href="#section-scenarios" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Scenarios &amp; Faraday</a>
         <a href="#section-quiz" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Self-Check</a>
       </nav>
     </div>
@@ -455,7 +455,7 @@
           </div>
         </div>
 
-        <!-- Main Spotlight Split Dashboard: Left = 3 Interactive Dimension Meters & Details | Right = 2D Epistemological Matrix -->
+        <!-- Main Spotlight Split Dashboard -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
           <!-- Left 7 Columns: The 3 Dimension Meters & Deep-Dive Card -->
@@ -567,7 +567,7 @@
                     SUBCONSCIOUS ← AWARENESS → FULLY CONSCIOUS
                   </text>
 
-                  <!-- Node 1: Intuitive Mode (Top-Left: Unanalyzable + Maximum Conscious Awareness) -->
+                  <!-- Node 1: Intuitive Mode -->
                   <g class="cursor-pointer" onclick="selectSpectrumMode('intuition')">
                     <circle id="ring-intuition" cx="105" cy="52" r="22" fill="rgba(245, 158, 11, 0.25)" class="hidden pulse-ring" />
                     <circle id="node-intuition" cx="105" cy="52" r="13" fill="#f59e0b" stroke="#fef3c7" stroke-width="2.5" />
@@ -575,7 +575,7 @@
                     <text x="105" y="92" text-anchor="middle" fill="#cbd5e1" font-size="8.5">(Noddings &amp; Shore)</text>
                   </g>
 
-                  <!-- Node 2: Tacit Knowing (Bottom-Left: Unanalyzable + Subsidiary/Subconscious) -->
+                  <!-- Node 2: Tacit Knowing -->
                   <g class="cursor-pointer" onclick="selectSpectrumMode('tacit')">
                     <circle id="ring-tacit" cx="105" cy="195" r="22" fill="rgba(16, 185, 129, 0.25)" class="hidden pulse-ring" />
                     <circle id="node-tacit" cx="105" cy="195" r="13" fill="#10b981" stroke="#d1fae5" stroke-width="2.5" />
@@ -583,7 +583,7 @@
                     <text x="105" y="220" text-anchor="middle" fill="#cbd5e1" font-size="8.5">(Polanyi: Subconscious)</text>
                   </g>
 
-                  <!-- Node 3: Scientific Mode (Top-Right: Formalized + High Focal Awareness) -->
+                  <!-- Node 3: Scientific Mode -->
                   <g class="cursor-pointer" onclick="selectSpectrumMode('scientific')">
                     <circle id="ring-scientific" cx="278" cy="75" r="22" fill="rgba(14, 165, 233, 0.25)" class="hidden pulse-ring" />
                     <circle id="node-scientific" cx="278" cy="75" r="13" fill="#0ea5e9" stroke="#e0f2fe" stroke-width="2.5" />
@@ -630,65 +630,103 @@
     </section>
 
     <!-- =====================================================================
-         SECTION 3: INTERACTIVE SCENARIO EXPLORER (REAL-WORLD APPLICATION)
+         SECTION 3: INTERACTIVE SCENARIO EXPLORER (HISTORICAL & APPLIED)
          ===================================================================== -->
     <section id="section-scenarios" class="scroll-mt-20">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-            Applied Epistemology Lab
+            Historical &amp; Applied Epistemology Lab
           </div>
           <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
-            Real-World Scenarios: Seeing All Four Lenses in Action
+            Scenarios in Action: From Michael Faraday to Mentoring
           </h2>
           <p class="text-sm sm:text-base text-slate-600 mt-1 max-w-3xl">
-            Select a scenario below to see how a situation looks through a <strong>Pure Critical/Scientific Lens</strong>, <strong>Polanyi’s Tacit Knowing</strong>, <strong>Noddings &amp; Shore’s Conscious Intuition</strong>, and <strong>The Constructive Thinker’s Synthesis</strong>.
+            Explore how <strong>Pure Critical Formalism</strong>, <strong>Polanyi’s Tacit Knowing</strong>, <strong>Noddings &amp; Shore’s Conscious Intuition</strong>, and <strong>Constructive Thinking</strong> operate across historical science, education, and modern practice.
           </p>
         </div>
       </div>
 
-      <!-- Scenario Selector Tabs -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6" role="tablist">
+      <!-- Scenario Selector Tabs (4 Scenarios) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6" role="tablist">
+        <!-- Tab 0: Physics Science - Michael Faraday -->
         <button
           id="scenario-tab-0"
           onclick="selectScenario(0)"
-          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2"
         >
-          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 font-bold">
-            1
+          <div class="flex items-center justify-between w-full">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 font-bold text-xs">
+              01
+            </span>
+            <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">
+              Physics • History of Science
+            </span>
           </div>
           <div>
-            <div class="font-bold text-slate-900 text-sm sm:text-base">Pacing an Endurance Race</div>
-            <div class="text-xs text-slate-500 mt-0.5">Athletic adjustment at Kilometer 32</div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Michael Faraday’s Physics</div>
+            <div class="text-xs text-slate-500 mt-0.5">Visualizing electromagnetic "lines of force" without formal calculus</div>
           </div>
         </button>
 
+        <!-- Tab 1: Education & Mentoring -->
         <button
           id="scenario-tab-1"
           onclick="selectScenario(1)"
-          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2"
         >
-          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 font-bold">
-            2
+          <div class="flex items-center justify-between w-full">
+            <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 font-bold text-xs">
+              02
+            </span>
+            <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800">
+              Noddings &amp; Shore • Education
+            </span>
           </div>
           <div>
-            <div class="font-bold text-slate-900 text-sm sm:text-base">Debugging System Architecture</div>
-            <div class="text-xs text-slate-500 mt-0.5">Diagnosing an elusive distributed outage</div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Mentoring a Student</div>
+            <div class="text-xs text-slate-500 mt-0.5">Receptive intuition &amp; personal voice in office hours</div>
           </div>
         </button>
 
+        <!-- Tab 2: Endurance Race Pacing -->
         <button
           id="scenario-tab-2"
           onclick="selectScenario(2)"
-          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3.5"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2"
         >
-          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0 font-bold">
-            3
+          <div class="flex items-center justify-between w-full">
+            <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold text-xs">
+              03
+            </span>
+            <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+              Applied Analogy • Sport
+            </span>
           </div>
           <div>
-            <div class="font-bold text-slate-900 text-sm sm:text-base">Mentoring a Student or Teammate</div>
-            <div class="text-xs text-slate-500 mt-0.5">Responding to unspoken hesitation</div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Pacing an Endurance Race</div>
+            <div class="text-xs text-slate-500 mt-0.5">Embodied adjustment at Kilometer 32</div>
+          </div>
+        </button>
+
+        <!-- Tab 3: Debugging System Architecture -->
+        <button
+          id="scenario-tab-3"
+          onclick="selectScenario(3)"
+          class="scenario-tab-btn p-4 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-2"
+        >
+          <div class="flex items-center justify-between w-full">
+            <span class="w-8 h-8 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 font-bold text-xs">
+              04
+            </span>
+            <span class="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+              Applied Analogy • Systems
+            </span>
+          </div>
+          <div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base">Debugging System Outage</div>
+            <div class="text-xs text-slate-500 mt-0.5">Diagnosing an elusive distributed failure</div>
           </div>
         </button>
       </div>
@@ -739,12 +777,12 @@
           </span>
           <h2 class="text-2xl font-bold mt-1">Can You Distinguish the Mental Modes?</h2>
           <p class="text-sm text-slate-300 mt-1">
-            Test your understanding of Noddings &amp; Shore (1984), Polanyi’s Tacit Knowing, and Thayer-Bacon’s Constructive Thinking.
+            Test your understanding of Noddings &amp; Shore (1984), Polanyi’s Tacit Knowing, Michael Faraday’s intuition, and Thayer-Bacon’s Constructive Thinking.
           </p>
         </div>
         <div class="flex items-center gap-3 shrink-0">
           <span id="quiz-score-badge" class="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-mono font-semibold text-indigo-200">
-            Score: 0 / 3 Answered
+            Score: 0 / 4 Answered
           </span>
           <button onclick="resetQuiz()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-slate-200 transition cursor-pointer">
             Reset Check
@@ -752,7 +790,7 @@
         </div>
       </div>
 
-      <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div id="quiz-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <!-- Populated by JS -->
       </div>
     </section>
@@ -871,8 +909,8 @@
           badge: "Valued: 'We Know More Than We Can Tell'",
           heading: "Honors Subsidiary, Embodied Experience",
           description: "Embraces Polanyi's insight that tacit knowing is unanalyzable and operates beneath focal awareness—our body and accumulated experience integrate clues subconsciously.",
-          exampleTitle: "Daily-Life Example (Constructive):",
-          example: "Riding a bicycle or reading a loved one's micro-expressions effortlessly through subsidiary bodily cues we could never fully write down."
+          exampleTitle: "Literature Example (Polanyi):",
+          example: "Keeping your balance on a bicycle or recognizing a friend's face among thousands effortlessly through subsidiary cues we could never formally write down."
         }
       },
       {
@@ -887,14 +925,14 @@
           heading: "Excluded from the Scientific Paradigm",
           description: "Because intuition cannot be formalized or operationalized into linear steps, strict critical thinking sidelines it as irrational mysticism or unverified hunch.",
           exampleTitle: "Daily-Life Example (Critical Only):",
-          example: "Ignoring a sudden, crystal-clear architectural realization during a quiet walk because it didn't emerge from a step-by-step deduction."
+          example: "Ignoring a sudden, crystal-clear architectural or scientific realization because it didn't emerge from a step-by-step formal deduction."
         },
         constructive: {
           badge: "Celebrated as 'Fully Conscious' Mode",
           heading: "Receptive, Hyper-Present Holistic Seeing",
           description: "Following Noddings & Shore (1984, p. 54), recognizes that while intuition is unanalyzable like tacit knowing, 'no mental mode could be more fully conscious than the intuitive mode.'",
-          exampleTitle: "Daily-Life Example (Constructive):",
-          example: "Being completely awake and receptive to a complex problem until the whole pattern suddenly clicks into vivid, conscious clarity."
+          exampleTitle: "Historical Example (Faraday & Noddings):",
+          example: "Michael Faraday consciously visualizing curved electromagnetic 'lines of force' in space long before formal mathematics could represent them."
         }
       },
       {
@@ -906,16 +944,16 @@
         critical: {
           badge: "Language Captures All Valid Thought",
           heading: "Propositional Transparency Assumption",
-          description: "Assumes that any genuine knowledge can and must be translated without loss into literal, unambiguous verbal propositions or mathematical symbols.",
-          exampleTitle: "Daily-Life Example (Critical Only):",
-          example: "Rejecting a student's deep conceptual grasp of a physics phenomenon because they explain it through an analogy and sketch rather than textbook jargon."
+          description: "Assumes that any genuine knowledge can and must be translated without loss into literal, unambiguous verbal propositions or formal mathematical symbols.",
+          exampleTitle: "Historical Example (Critical Only):",
+          example: "19th-century mathematical physicists initially dismissing Michael Faraday's electromagnetic discoveries because he expressed them in visual diagrams rather than calculus."
         },
         constructive: {
           badge: "Recognizes Language Can Be a Barrier",
           heading: "Honors Insights That Resist Formalization",
-          description: "Acknowledges that literal language is a powerful tool but also a filter that can constrain thought; values metaphor, art, gesture, and pre-verbal intuitive grasp.",
-          exampleTitle: "Daily-Life Example (Constructive):",
-          example: "Using visual metaphors, prototypes, and shared reflection when strict technical vocabulary fails to capture a novel breakthrough."
+          description: "Acknowledges that formal language and notation can act as a structural barrier to expressing multidimensional, intuitive thought; values visual metaphor, personal voice, and sketches.",
+          exampleTitle: "Historical Example (Constructive):",
+          example: "Honoring Faraday's visual 'lines of force' as profound physical knowledge that later inspired James Clerk Maxwell to formulate Maxwell's Equations."
         }
       }
     ];
@@ -986,7 +1024,7 @@
             pillClass: "bg-emerald-100 text-emerald-800",
             width: "25%",
             barClass: "bg-emerald-500",
-            desc: "Operates in the background (subsidiary awareness). When you ride a bike or play piano, your body knows how without conscious calculation."
+            desc: "Operates in the background (subsidiary awareness). When you ride a bike or adjust lab apparatus, your body knows how without conscious calculation."
           }
         },
         takeawayClass: "bg-emerald-50 border-emerald-200 text-emerald-950",
@@ -1062,12 +1100,82 @@
 
     /**
      * ========================================================================
-     * 3. DATASET: REAL-WORLD SCENARIOS (3 Relatable Cases x 4 Lenses)
+     * 3. DATASET: 4 SCENARIOS (Faraday Physics, Mentoring, Endurance, Systems)
      * ========================================================================
      */
     const scenariosData = [
       {
-        tag: "Scenario 01 • Athletics & Embodied Pacing",
+        tag: "Scenario 01 • Physics & History of Science (Literature Case)",
+        title: "Michael Faraday’s Electromagnetic 'Lines of Force'",
+        context: "In the 1830s–1850s, physicist Michael Faraday discovered electromagnetic induction and field interactions. Having received almost no formal mathematical education beyond basic arithmetic, Faraday could not write differential equations—and formal mathematical physicists initially doubted his theories.",
+        lenses: {
+          scientific: {
+            title: "Pure Critical / Scientific Lens",
+            subtitle: "Formalized Mathematical Equations Only",
+            badge: "Formalized & Operationalized",
+            color: "sky",
+            response: "Contemporary mathematical physicists insisted on strict Newtonian 'action-at-a-distance' algebraic formulas. Because Faraday's descriptions were not formalized into calculus equations, strict scientific formalism initially dismissed his theoretical ideas as vague, non-rigorous speculation."
+          },
+          tacit: {
+            title: "Tacit Knowing (Polanyi)",
+            subtitle: "Subconscious, Embodied Laboratory Craft",
+            badge: "Unanalyzable • Subconscious",
+            color: "emerald",
+            response: "Through decades of hands-on experimentation at the Royal Institution, Faraday built extraordinary tacit mastery over copper coils, iron filings, and galvanometers—subsidiary sensory adjustments in his hands and eyes that operated beneath focal awareness and could never be fully formalized into a manual."
+          },
+          intuition: {
+            title: "Conscious Intuition (Noddings & Shore)",
+            subtitle: "Fully Conscious Spatial & Visual Insight",
+            badge: "Unanalyzable • Fully Conscious",
+            color: "amber",
+            response: "Operating in Noddings & Shore's fully conscious intuitive mode (1984, p. 54), Faraday vividly envisioned space not as empty void, but as alive with curved, dynamic 'lines of force.' Though unanalyzable in formal math at the time, his wide-awake spatial intuition saw the whole physical reality directly."
+          },
+          constructive: {
+            title: "The Constructive Thinker's Synthesis",
+            subtitle: "Bridging Personal Voice, Intuition, Craft & Formal Math",
+            badge: "Thayer-Bacon Synthesis",
+            color: "indigo",
+            response: "Recognizes that formal mathematical language can act as a barrier to novel insight. Constructive Thinking honors Faraday's personal voice, tacit craft, and conscious visual intuition as genuine knowledge—which James Clerk Maxwell later receptively translated into Maxwell's Equations."
+          }
+        }
+      },
+      {
+        tag: "Scenario 02 • Education & Relational Knowing (Noddings & Shore / Thayer-Bacon)",
+        title: "Mentoring a Student or Teammate in Office Hours",
+        context: "A capable graduate student presents their research proposal. On paper, every rubric requirement is checked off, and they say 'Everything is going fine,' yet the project feels stalled and disconnected from their own voice.",
+        lenses: {
+          scientific: {
+            title: "Pure Critical / Scientific Lens",
+            subtitle: "Formalized Rubric & Explicit Criteria",
+            badge: "Formalized & Operationalized",
+            color: "sky",
+            response: "Evaluates the proposal strictly against the standardized 10-point rubric: literature review has 25 citations, methodology is valid, timeline is filled in. Marks the advising session 'Complete—Satisfactory' and moves on."
+          },
+          tacit: {
+            title: "Tacit Knowing (Polanyi)",
+            subtitle: "Subconscious, Subsidiary Relational Cues",
+            badge: "Unanalyzable • Subconscious",
+            color: "emerald",
+            response: "Without consciously analyzing why, the mentor's own posture softens and their voice slows down in response to micro-tensions in the student's cadence, breathing, and eye contact."
+          },
+          intuition: {
+            title: "Conscious Intuition (Noddings & Shore)",
+            subtitle: "Fully Conscious, Receptive Attunement",
+            badge: "Unanalyzable • Fully Conscious",
+            color: "amber",
+            response: "Practicing Noddings' receptive, fully conscious presence—listening deeply beyond the formal words—the mentor vividly perceives that the student is struggling with the barrier of academic jargon and is afraid to voice their original intuitive idea."
+          },
+          constructive: {
+            title: "The Constructive Thinker's Synthesis",
+            subtitle: "Weaving Rubric + Tacit Warmth + Conscious Intuition",
+            badge: "Thayer-Bacon Synthesis",
+            color: "indigo",
+            response: "Acknowledges the strong analytical structure of the draft (Critical), creates a safe relational space (Tacit), and gently invites the student to sketch or describe their idea in their own personal voice (Intuitive)—co-constructing a stronger research question."
+          }
+        }
+      },
+      {
+        tag: "Scenario 03 • Athletics & Embodied Pacing (Applied Analogy)",
         title: "Pacing an Endurance Race at Kilometer 32",
         context: "You are 32 km into a marathon on a warm, gusty afternoon. Your GPS watch says your target pace is 4:45/km and heart rate is 166 bpm, right on your spreadsheet plan—yet the final 10 km climb looms ahead.",
         lenses: {
@@ -1102,7 +1210,7 @@
         }
       },
       {
-        tag: "Scenario 02 • Software & Systems Engineering",
+        tag: "Scenario 04 • Software & Systems Engineering (Applied Analogy)",
         title: "Debugging an Elusive Distributed System Outage",
         context: "A cloud platform experiences intermittent 2-second latency spikes every few hours. All standard CPU, memory, and unit-test dashboards report '100% Green / Passing'.",
         lenses: {
@@ -1135,47 +1243,12 @@
             response: "Uses the conscious intuitive insight to form a bold new hypothesis, relies on tacit log-reading fluency to locate the exact trace, and then applies rigorous scientific instrumentation to formally verify and patch the retry storm."
           }
         }
-      },
-      {
-        tag: "Scenario 03 • Education & Leadership",
-        title: "Mentoring a Student or Teammate in Office Hours",
-        context: "A capable graduate student presents their research proposal. On paper, every rubric requirement is checked off, and they say 'Everything is going fine,' yet the project feels stalled.",
-        lenses: {
-          scientific: {
-            title: "Pure Critical / Scientific Lens",
-            subtitle: "Formalized Metrics & Explicit Rules",
-            badge: "Formalized & Operationalized",
-            color: "sky",
-            response: "Evaluates the proposal strictly against the standardized 10-point rubric: literature review has 25 citations, methodology is valid, timeline is filled in. Marks the advising session 'Complete—Satisfactory' and moves on."
-          },
-          tacit: {
-            title: "Tacit Knowing (Polanyi)",
-            subtitle: "Subconscious, Subsidiary Relational Cues",
-            badge: "Unanalyzable • Subconscious",
-            color: "emerald",
-            response: "Without consciously analyzing why, the mentor's own posture softens and their voice slows down in response to micro-tensions in the student's cadence and eye contact."
-          },
-          intuition: {
-            title: "Conscious Intuition (Noddings & Shore)",
-            subtitle: "Fully Conscious, Receptive Attunement",
-            badge: "Unanalyzable • Fully Conscious",
-            color: "amber",
-            response: "Practicing Noddings' receptive, fully conscious presence—listening deeply beyond the rubric—the mentor vividly perceives that the student no longer feels connected to the research question and is afraid to admit they want to pivot."
-          },
-          constructive: {
-            title: "The Constructive Thinker's Synthesis",
-            subtitle: "Weaving Rubric + Tacit Warmth + Conscious Intuition",
-            badge: "Thayer-Bacon Synthesis",
-            color: "indigo",
-            response: "Acknowledges the strong analytical structure of the draft (Critical), creates a safe relational space (Tacit), and gently asks an open question born of conscious intuition—helping the student reshape the topic into something both rigorous and deeply meaningful."
-          }
-        }
       }
     ];
 
     /**
      * ========================================================================
-     * 4. DATASET: SELF-CHECK QUIZ QUESTIONS
+     * 4. DATASET: SELF-CHECK QUIZ QUESTIONS (4 Questions including Faraday)
      * ========================================================================
      */
     const quizQuestions = [
@@ -1199,10 +1272,19 @@
       },
       {
         id: 2,
+        question: "Why is physicist Michael Faraday a classic example of Constructive Thinking and Conscious Intuition?",
+        options: [
+          { text: "He relied exclusively on advanced calculus equations before doing any experiments.", correct: false, feedback: "Actually, Faraday had very little formal mathematical training and did not use calculus." },
+          { text: "Without formal calculus, he used vivid, conscious spatial intuition ('lines of force') and tacit lab craft to discover electromagnetic laws.", correct: true, feedback: "Correct! Faraday shows how formal mathematical language can be a barrier, yet conscious visual intuition and tacit skill can construct revolutionary scientific knowledge." },
+          { text: "He proved that scientific experiments are unnecessary if you have intuition.", correct: false, feedback: "Faraday combined thousands of rigorous hands-on experiments with his visual intuition." }
+        ]
+      },
+      {
+        id: 3,
         question: "How does Barbara Thayer-Bacon's Constructive Thinking treat Traditional Critical Thinking?",
         options: [
           { text: "It proves that logic and scientific metrics are useless.", correct: false, feedback: "Constructive thinking still values logic and evidence—it simply refuses to treat them as the ONLY valid tools." },
-          { text: "It expands critical thinking to weave reason together with intuition, tacit knowing, emotion, and imagination.", correct: true, feedback: "Correct! Constructive Thinking is an inclusive umbrella that integrates analytical reason with embodied, intuitive, and relational knowing." },
+          { text: "It expands critical thinking to weave reason together with intuition, tacit knowing, emotion, and personal voice.", correct: true, feedback: "Correct! Constructive Thinking is an inclusive umbrella that integrates analytical reason with embodied, intuitive, and relational knowing." },
           { text: "It replaces human judgment with automated operational checklists.", correct: false, feedback: "That would be strict formalism; Constructive Thinking highlights the embedded, relational human knower." }
         ]
       }
@@ -1271,7 +1353,7 @@
               <span class="px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-bold uppercase tracking-wider">Side-by-Side Comparison</span>
               <span class="font-bold text-sm sm:text-base">Comparing Both Paradigms Across All 6 Epistemological Factors</span>
             </div>
-            <span class="text-xs text-indigo-700 font-semibold">Notice Cards #04 (Polanyi) &amp; #05 (Noddings &amp; Shore)</span>
+            <span class="text-xs text-indigo-700 font-semibold">Notice Cards #04 (Polanyi), #05 (Noddings &amp; Shore) &amp; #06 (Faraday)</span>
           </div>
         `;
       }
@@ -1378,11 +1460,11 @@
             </div>
           </div>
 
-          <!-- Concrete Daily-Life Contrast Footer -->
+          <!-- Concrete Contrast Footer -->
           <div class="pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5">
             <div class="font-bold text-slate-800 flex items-center gap-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              Concrete Daily-Life Shift:
+              ${factor.constructive.exampleTitle}
             </div>
             <p class="leading-relaxed">${factor.constructive.example}</p>
           </div>
@@ -1492,7 +1574,7 @@
     }
 
     /**
-     * Updates Section 3: Real-World Scenario Explorer
+     * Updates Section 3: Historical & Applied Scenario Explorer
      */
     function selectScenario(index) {
       currentScenarioIndex = index;
@@ -1503,9 +1585,9 @@
         const btn = document.getElementById(`scenario-tab-${idx}`);
         if (!btn) return;
         if (idx === index) {
-          btn.className = "scenario-tab-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/50 shadow-xs text-left transition-all cursor-pointer flex items-start gap-3.5";
+          btn.className = "scenario-tab-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/50 shadow-xs text-left transition-all cursor-pointer flex flex-col justify-between gap-2";
         } else {
-          btn.className = "scenario-tab-btn p-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all cursor-pointer flex items-start gap-3.5";
+          btn.className = "scenario-tab-btn p-4 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition-all cursor-pointer flex flex-col justify-between gap-2";
         }
       });
 
@@ -1597,7 +1679,7 @@
                   }
                   return `
                     <button
-                      onclick="answerQuiz(${q.id}, ${oIdx})"
+                      onclick="answerQuiz(${q.id},${oIdx})"
                       class="w-full text-left p-3 rounded-xl border text-xs leading-relaxed transition cursor-pointer ${btnStyle}"
                     >
                       ${opt.text}
@@ -1635,7 +1717,7 @@
     }
 
     /**
-     * Copies the Noddings & Shore (1984, p. 54) excerpt to clipboard using execCommand for iframe compatibility
+     * Copies the Noddings & Shore (1984, p. 54) excerpt to clipboard
      */
     function copyExcerptToClipboard() {
       const text = `Intuition, as Noddings and Shore describe, shares the qualities that Polanyi mentioned with tacit knowing, in that it is unanalyzable and not something that can be formalized and operationalized. It does not fit the scientific paradigm of thought. And yet, unlike Polanyi, intuition is something that we are conscious of. “No mental mode could be more fully conscious than the intuitive mode” (1984, p. 54).`;
