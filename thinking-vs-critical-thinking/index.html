@@ -333,6 +333,42 @@
       color: var(--text-primary);
     }
 
+    /* Embedded Video Player Styles */
+    .example-video-wrapper {
+      margin-top: 0.75rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--accent-border);
+      background: #050b14;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .example-video-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.75rem;
+      background: var(--accent-soft);
+      border-bottom: 1px solid var(--accent-border);
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .example-video-player {
+      display: block;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .scenario-col .example-video-player {
+      max-height: 300px;
+    }
+
     .compare-split {
       display: none;
       margin-top: 0.65rem;
@@ -496,6 +532,16 @@
 </div>
 
 <script>
+  // ============================================================================
+  // VIDEO FILE PATHS:
+  // Save the two generated videos in the same folder as this HTML file using
+  // the filenames below, or update these paths to match your video filenames.
+  // ============================================================================
+  const VIDEO_SOURCES = {
+    normalClarity: "non-critical-clarity.mp4", // Video 1: Non-Critical Thinker (Unclarified Confusion & Carrying Ice)
+    criticalClarity: "critical-clarity.mp4"    // Video 2: Critical Thinker (Disposition + Ability to Clarify Meaning)
+  };
+
   const state = {
     criticalEnabled: false,
     showBoth: false,
@@ -573,6 +619,8 @@
       ],
       normalDailyTitle: "Daily-Life Example: Confusing Class/Meeting & Carrying Ice",
       normalDailyText: "Sits in a confusing discussion unable to formulate a clarifying question; or gets confused by a shift in word meaning—like a boss claiming you did no 'work' (in the physics sense) after carrying a heavy block of ice a long distance (Ennis 1996, pp. 166–167).",
+      normalVideo: VIDEO_SOURCES.normalClarity,
+      normalVideoLabel: "🎬 Animated Case: Non-Critical Thinker (Unclarified Confusion & Carrying Ice)",
       ctTitle: "Disposition + Ability to Clarify Meaning",
       ctBody: "Recognizes ambiguity, asks pointed questions to build understanding, and keeps everyday vs. technical meanings clear.",
       ctBullets: [
@@ -581,6 +629,8 @@
       ],
       ctDailyTitle: "Daily-Life Example: Asking Pointed Questions",
       ctDailyText: "When a discussion or policy is confusing, actively asks pointed questions like 'What's the main idea?' and 'What does that imply for the situation?'—and clearly separates everyday work (carrying ice) from physics definitions (Ennis 1996, p. 167).",
+      ctVideo: VIDEO_SOURCES.criticalClarity,
+      ctVideoLabel: "🎬 Animated Case: Critical Thinker (Asking Pointed Questions & Semantic Clarity)",
       citation: "Ennis (1996, pp. 166–169)"
     },
     {
@@ -717,7 +767,7 @@
       ]
     },
     {
-      tab: "6. Confusing Talk & Carrying Ice",
+      tab: "6. Confusing Talk & Carrying Ice 🎬",
       source: "Ennis (1996, pp. 166–168) — Dispositions, Abilities & Everyday Meaning",
       situation: "Communication & Workplace: In a class or meeting, someone presents a confusing argument. Later, a worker carries a heavy block of ice a long distance at the direction of their boss, and someone claims no 'work' (in the physics sense) was done.",
       normalTitle: "Uncritical Response: Helplessness or Linguistic Confusion",
@@ -726,14 +776,33 @@
         "Either fails to sense the need for clarification at all, or lacks the ability to ask clarifying questions (Ennis 1996, pp. 166–167).",
         "Allows shifts between technical definitions and everyday meanings to cause confusion and damage (Ennis 1996, p. 167)."
       ],
+      normalVideo: VIDEO_SOURCES.normalClarity,
+      normalVideoLabel: "🎬 Non-Critical Thinker Animation (Confusing Class & Carrying Ice)",
       ctTitle: "Reflective Response: Pointed Questions & Semantic Clarity",
       ctQuote: "“Let's clarify by asking pointed questions: 'What's the main idea?' and 'What does that imply for the situation?' And no boss can withhold pay for carrying heavy ice by appealing to the special physics sense of 'work'!”",
       ctSteps: [
         "Combines the disposition to clarify with the sensitivity to notice confusion and the ability to ask pointed questions (Ennis 1996, pp. 166–167).",
         "Protects everyday meanings in practical and educational contexts so no one is misled by technical redefinitions (Ennis 1996, pp. 167–168)."
-      ]
+      ],
+      ctVideo: VIDEO_SOURCES.criticalClarity,
+      ctVideoLabel: "🎬 Critical Thinker Animation (Asking Pointed Questions & Semantic Clarity)"
     }
   ];
+
+  function renderVideoBlock(videoSrc, videoLabel) {
+    if (!videoSrc) return "";
+    return `
+      <div class="example-video-wrapper">
+        <div class="example-video-header">
+          <span>${videoLabel || "🎬 Scenario Animation"}</span>
+        </div>
+        <video class="example-video-player" controls preload="metadata">
+          <source src="${videoSrc}" type="video/mp4" />
+          Your browser does not support the HTML5 video tag.
+        </video>
+      </div>
+    `;
+  }
 
   function renderApp() {
     const body = document.body;
@@ -766,8 +835,13 @@
       const mainBullets = isCT ? card.ctBullets : card.normalBullets;
       const dailyTitle = isCT ? card.ctDailyTitle : card.normalDailyTitle;
       const dailyText = isCT ? card.ctDailyText : card.normalDailyText;
+      const mainVideo = isCT ? card.ctVideo : card.normalVideo;
+      const mainVideoLabel = isCT ? card.ctVideoLabel : card.normalVideoLabel;
+
       const altTitle = isCT ? card.normalTitle : card.ctTitle;
       const altDailyText = isCT ? card.normalDailyText : card.ctDailyText;
+      const altVideo = isCT ? card.normalVideo : card.ctVideo;
+      const altVideoLabel = isCT ? card.normalVideoLabel : card.ctVideoLabel;
 
       return `
         <article class="factor-card">
@@ -783,10 +857,12 @@
             <div class="daily-example-box">
               <span class="daily-example-tag">🏡 ${dailyTitle}</span>
               <p class="daily-example-text">${dailyText}</p>
+              ${renderVideoBlock(mainVideo, mainVideoLabel)}
             </div>
             <div class="compare-split">
               <strong>Contrast (${isCT ? 'Normal Mode' : 'Critical Mode'} — ${altTitle}):</strong>
               <p style="color: var(--text-secondary); margin-top: 0.25rem;">${altDailyText}</p>
+              ${renderVideoBlock(altVideo, altVideoLabel)}
             </div>
           </div>
           <div>
@@ -814,12 +890,23 @@
     const rTitle = isCT ? current.ctTitle : current.normalTitle;
     const rQuote = isCT ? current.ctQuote : current.normalQuote;
     const rSteps = isCT ? current.ctSteps : current.normalSteps;
+    const rVideo = isCT ? current.ctVideo : current.normalVideo;
+    const rVideoLabel = isCT ? current.ctVideoLabel : current.normalVideoLabel;
+
+    const altTitle = isCT ? current.normalTitle : current.ctTitle;
+    const altVideo = isCT ? current.normalVideo : current.ctVideo;
+    const altVideoLabel = isCT ? current.normalVideoLabel : current.ctVideoLabel;
 
     stageEl.innerHTML = `
       <div class="scenario-col">
         <h4>Everyday Situation</h4>
         <p style="font-size: 0.92rem; margin-bottom: 0.65rem;">${current.situation}</p>
         <span class="citation-tag">📄 ${current.source}</span>
+        ${state.showBoth && altVideo ? `
+          <div style="margin-top: 1rem;">
+            <h4>Contrast (${isCT ? 'Normal Mode' : 'Critical Mode'} — ${altTitle})</h4>${renderVideoBlock(altVideo, altVideoLabel)}
+          </div>
+        ` : ""}
       </div>
       <div class="scenario-col">
         <h4>${rTitle}</h4>
@@ -827,6 +914,7 @@
         <ul class="steps-checklist">
           ${rSteps.map(step => `<li>${step}</li>`).join("")}
         </ul>
+        ${renderVideoBlock(rVideo, rVideoLabel)}
       </div>
     `;
   }
