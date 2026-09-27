@@ -538,13 +538,17 @@
   // the filenames below, or update these paths to match your video filenames.
   // ============================================================================
   const VIDEO_SOURCES = {
-    // Card 1: 1. Initiation & Sensitivity to Surroundings
+    // Card 1 & Scenario 3: 1. Initiation & Sensitivity to Surroundings
     normalInitiation: "non-critical-initiation.mp4",           // Non-Critical: Passive Observation & Unnoticed Clues
     criticalInitiation: "critical-initiation-subtitled.mp4",   // Critical (Subtitled): Attentive Scientific Attitude of Mind
 
     // Card 4 & Scenario 6: 4. Clarity, Meaning & Pointed Questions
     normalClarity: "non-critical-clarity.mp4",                 // Non-Critical: Unclarified Confusion & Carrying Ice
-    criticalClarity: "critical-clarity.mp4"                    // Critical: Disposition + Ability to Clarify Meaning
+    criticalClarity: "critical-clarity.mp4",                   // Critical: Disposition + Ability to Clarify Meaning
+
+    // Card 6 & Scenarios 1 & 4: 6. Goal-Directed Daily Decisions
+    normalDecisions: "non-critical-decisions.mp4",             // Non-Critical: Habitual Routine or Hasty Medical Guess
+    criticalDecisions: "critical-decisions-concluded.mp4"      // Critical (Concluded per topic): Reasonable Reflective Decision-Making
   };
 
   const state = {
@@ -672,6 +676,8 @@
       ],
       normalDailyTitle: "Daily-Life Example: Late Commute & Sudden Skin Rash",
       normalDailyText: "Boards the same surface car at 12:20 PM and arrives 20 minutes late to a 1:00 PM engagement; or blames a sudden chest rash on a single medication without checking conflicting clues on the back of the hand (Hitchcock 2024, Section 2.1, Section 2.3).",
+      normalVideo: VIDEO_SOURCES.normalDecisions,
+      normalVideoLabel: "🎬 Animated Case: Non-Critical Thinker (Late Commute & Hasty Rash Guess)",
       ctTitle: "Reasonable Reflective Decision-Making",
       ctBody: "Focuses reasonable reflective thinking on deciding what to believe or do by weighing all options and constraints.",
       ctBullets: [
@@ -680,13 +686,15 @@
       ],
       ctDailyTitle: "Daily-Life Example: Express Subway & Weighing 5 Rash Causes",
       ctDailyText: "Compares surface car, elevated train, and subway express station proximity to reach 124th Street by 1:00 PM; or weighs sulfa drug timing, new neck cream, unexposed hand mark, probiotics, eye drops, and heat rash before a trip (Hitchcock 2024, Section 2.1, Section 2.3).",
+      ctVideo: VIDEO_SOURCES.criticalDecisions,
+      ctVideoLabel: "🎬 Animated Case: Critical Thinker (Express Subway & Weighing 5 Rash Causes)",
       citation: "Ennis (1996, p. 166); Hitchcock (2024, Sections 2.1–2.3)"
     }
   ];
 
   const scenariosData = [
     {
-      tab: "1. City Commute (Transit)",
+      tab: "1. City Commute (Transit) 🎬",
       source: "Dewey (1910: 68–69; 1933: 91–92) via Hitchcock (2024, Section 2.1 'Transit')",
       situation: "You are downtown on 16th Street when a clock catches your eye at 12:20 PM. You have a 1:00 PM engagement at 124th Street. It took you a full hour to ride down on a surface streetcar.",
       normalTitle: "Uncritical Commute: Habit or Impulsive Detour",
@@ -695,13 +703,17 @@
         "Takes the surface car again without calculating travel time and arrives 20 minutes late.",
         "Or chases an elevated line without considering that searching for a station several blocks up or down the street could lose more than 20 minutes."
       ],
+      normalVideo: VIDEO_SOURCES.normalDecisions,
+      normalVideoLabel: "🎬 Non-Critical Thinker Animation (Late Surface Car Commute & Hasty Rash Guess)",
       ctTitle: "Reflective Commute: Weighing Trade-offs & Proximity",
       ctQuote: "“Returning by surface car will make me 20 minutes late. An elevated line is within two blocks, but if the station is several blocks away I'll lose time. The subway express is quicker AND goes nearer to the part of 124th Street I need to reach!”",
       ctSteps: [
         "Calculates that a 1-hour surface car ride from 12:20 PM means arriving 20 minutes late.",
         "Evaluates both the subway express and the nearby elevated line against station-search time.",
         "Remembers the subway express is faster and stops closer to the destination on 124th Street, arriving on time by 1:00 PM."
-      ]
+      ],
+      ctVideo: VIDEO_SOURCES.criticalDecisions,
+      ctVideoLabel: "🎬 Critical Thinker Animation (Express Subway Commute & Weighing 5 Rash Causes)"
     },
     {
       tab: "2. Messy Room (Disorder)",
@@ -744,7 +756,7 @@
       ctVideoLabel: "🎬 Critical Thinker Animation (Subtitled — Weather & Highway Diamond Lane)"
     },
     {
-      tab: "4. Skin Rash & Typhoid",
+      tab: "4. Skin Rash & Typhoid 🎬",
       source: "Hitchcock (2024, Section 2.2 'Typhoid', Section 2.3 'Rash')",
       situation: "Health & Diagnosis: A woman develops a very itchy red rash on her throat and upper chest, plus a mark on the back of her right hand, right before leaving on a short vacation without access to her usual physician. Meanwhile, a physician sees a patient with conspicuous symptoms suggesting typhoid.",
       normalTitle: "Uncritical Diagnosis: Conspicuous Symptoms Only",
@@ -753,13 +765,17 @@
         "Draws an immediate conclusion from conspicuous symptoms without gathering more data.",
         "Focuses on a single suspect while ignoring timing and conflicting physical clues."
       ],
+      normalVideo: VIDEO_SOURCES.normalDecisions,
+      normalVideoLabel: "🎬 Non-Critical Thinker Animation (Hasty Rash Guess & Late Commute)",
       ctTitle: "Reflective Diagnosis: Suspending Judgment & Weighing All Candidates",
       ctQuote: "“The physician avoids drawing a conclusion until questioning the patient and making tests. For the rash, let's weigh all 5 possibilities and their counter-evidence before leaving on vacation.”",
       ctSteps: [
         "Weighs (1) blood pressure medication with a sulfa drug started 2 weeks ago (pharmacist warned of allergy, but 2 weeks passed with no effect).",
         "Weighs (2) new neck/chest cream started yesterday (against this: the mark on the back of her right hand was not exposed to the cream).",
         "Also considers (3) probiotics started a month ago, (4) new eye drops, and (5) heat rash from recent profuse upper-body sweating."
-      ]
+      ],
+      ctVideo: VIDEO_SOURCES.criticalDecisions,
+      ctVideoLabel: "🎬 Critical Thinker Animation (Weighing 5 Rash Causes & Express Subway)"
     },
     {
       tab: "5. Kitchen Bubbles & Outdoors",
