@@ -534,12 +534,17 @@
 <script>
   // ============================================================================
   // VIDEO FILE PATHS:
-  // Save the two generated videos in the same folder as this HTML file using
+  // Save the generated videos in the same folder as this HTML file using
   // the filenames below, or update these paths to match your video filenames.
   // ============================================================================
   const VIDEO_SOURCES = {
-    normalClarity: "non-critical-clarity.mp4", // Video 1: Non-Critical Thinker (Unclarified Confusion & Carrying Ice)
-    criticalClarity: "critical-clarity.mp4"    // Video 2: Critical Thinker (Disposition + Ability to Clarify Meaning)
+    // Card 1: 1. Initiation & Sensitivity to Surroundings
+    normalInitiation: "non-critical-initiation.mp4",           // Non-Critical: Passive Observation & Unnoticed Clues
+    criticalInitiation: "critical-initiation-subtitled.mp4",   // Critical (Subtitled): Attentive Scientific Attitude of Mind
+
+    // Card 4 & Scenario 6: 4. Clarity, Meaning & Pointed Questions
+    normalClarity: "non-critical-clarity.mp4",                 // Non-Critical: Unclarified Confusion & Carrying Ice
+    criticalClarity: "critical-clarity.mp4"                    // Critical: Disposition + Ability to Clarify Meaning
   };
 
   const state = {
@@ -559,6 +564,8 @@
       ],
       normalDailyTitle: "Daily-Life Example: Walking Outside & Highway Driving",
       normalDailyText: "Feels the air suddenly turn cool on a walk or sees diamond carpool lane marks change spacing on the highway, but never looks up at the sky or wonders why the road markings shifted (Hitchcock 2024, Sections 2.2–2.3).",
+      normalVideo: VIDEO_SOURCES.normalInitiation,
+      normalVideoLabel: "🎬 Animated Case: Non-Critical Thinker (Passive Observation & Unnoticed Clues)",
       ctTitle: "Attentive Scientific Attitude of Mind",
       ctBody: "Actively notices perplexing clues in everyday life and initiates persistent, careful inquiry into their grounds.",
       ctBullets: [
@@ -567,6 +574,8 @@
       ],
       ctDailyTitle: "Daily-Life Example: Weather, Distant Blur & Diamond Lane",
       ctDailyText: "Notices sudden coolness on a walk, infers rain, looks up to confirm a dark cloud obscuring the sun, and quickens steps; or confirms that highway diamond marks are close together only where a dotted single line allows lane crossing (Hitchcock 2024, Sections 2.2–2.3).",
+      ctVideo: VIDEO_SOURCES.criticalInitiation,
+      ctVideoLabel: "🎬 Animated Case (Subtitled): Critical Thinker (Attentive Scientific Attitude of Mind)",
       citation: "Ennis (1996, p. 166); Hitchcock (2024, Section 1, Sections 2.2–2.3)"
     },
     {
@@ -713,7 +722,7 @@
       ]
     },
     {
-      tab: "3. Ferryboat & Diamond Lane",
+      tab: "3. Ferryboat & Diamond Lane 🎬",
       source: "Dewey (1910: 69–70) & Hitchcock (2024, Section 2.1 'Ferryboat', Section 2.3 'Diamond')",
       situation: "Daily Transit Observations: (A) On your daily ferryboat, a long white pole with a gilded ball projects nearly horizontally from the upper deck. (B) On the highway, diamond markings in a carpool lane are far apart in some places and close together in others.",
       normalTitle: "Uncritical Observation: Accepting Surface Appearances",
@@ -722,13 +731,17 @@
         "Relies on color, shape, and gilded ball alone to justify the flagpole belief.",
         "Overlooks anomalous details (horizontal angle, missing rope/pulley, lane-line changes)."
       ],
+      normalVideo: VIDEO_SOURCES.normalInitiation,
+      normalVideoLabel: "🎬 Non-Critical Thinker Animation (Passive Observation & Highway Diamond Marks)",
       ctTitle: "Reflective Observation: Testing Hypotheses Against Evidence",
       ctQuote: "“The pole is nearly horizontal, has no pulley or cord, and two vertical flagstaffs exist elsewhere. It isn't an ornament or wireless terminal—it's positioned below the pilot house so the pilot can see the direction the boat points! And on the highway, diamonds are close together only where a dotted single line permits crossing into the lane.”",
       ctSteps: [
         "Spots difficulties with the flagpole idea (horizontal position, no pulley/ring/cord, two vertical flagstaffs elsewhere).",
         "Tests and rejects (a) ornament and (b) wireless terminal because tugboats also carry them and a wireless terminal belongs atop the pilot house.",
         "Confirms (c) steering direction guide for the pilot, and verifies road diamond spacing against dotted vs. solid lane lines."
-      ]
+      ],
+      ctVideo: VIDEO_SOURCES.criticalInitiation,
+      ctVideoLabel: "🎬 Critical Thinker Animation (Subtitled — Weather & Highway Diamond Lane)"
     },
     {
       tab: "4. Skin Rash & Typhoid",
